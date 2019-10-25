@@ -1,41 +1,32 @@
-#include "raylib.h"
+//
+//  main.cpp
+//  OctoJam2019
+//
+//  Created by Jean-Romain on 25/10/2019.
+//  Copyright © 2019 JustKodding. All rights reserved.
+//
 
-int main(int argc, char* argv[])
+#include "raylib.h"
+#include "Window.hpp"
+
+int main(void)
 {
     // Initialization
-    //--------------------------------------------------------------------------------------
-    int screenWidth = 800;
-    int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
-    SetTargetFPS(60);
-    //--------------------------------------------------------------------------------------
+    auto window = Window();
+    window.toggleFullscreen();
+    window.setCursorEnabled(false);
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
+    while (!WindowShouldClose()) {
         // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------   
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    CloseWindow();
 
     return 0;
 }
