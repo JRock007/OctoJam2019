@@ -7,5 +7,7 @@
 //
 
 class Node {
-    
+public:
+    virtual void draw();
+    virtual void update(float dt);
 };

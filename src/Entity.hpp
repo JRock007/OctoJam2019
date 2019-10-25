@@ -9,5 +9,6 @@
 #include "Node.hpp"
 
 class Entity: public Node {
-    
+    virtual void draw();
+    virtual void update(float dt);
 };
