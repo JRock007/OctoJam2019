@@ -7,6 +7,3 @@
 //
 
 #pragma once
-#include <tuple>
-
-typedef std::tuple<float, float> Point;
