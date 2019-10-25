@@ -13,6 +13,7 @@ Window::Window() {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "SHhhh!");
+    SetTargetFPS(60);
 }
 
 Window::~Window() {
