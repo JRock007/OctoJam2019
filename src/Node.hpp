@@ -6,6 +6,8 @@
 //  Copyright © 2019 JustKodding. All rights reserved.
 //
 
+#pragma once
+
 class Node {
 public:
     virtual void draw() = 0;
