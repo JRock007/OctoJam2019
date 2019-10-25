@@ -9,6 +9,7 @@
 #include "Node.hpp"
 
 class Scene: public Node {
-    virtual void draw();
-    virtual void update(float dt);
+public:
+    virtual void draw() = 0;
+    virtual void update(float dt) = 0;
 };
