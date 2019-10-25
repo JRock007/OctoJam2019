@@ -11,6 +11,6 @@
 
 class Scene: public Node {
 public:
-    virtual void draw() = 0;
+    void draw();
     virtual void update(float dt) = 0;
 };

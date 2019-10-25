@@ -7,3 +7,9 @@
 //
 
 #include "Scene.hpp"
+#include "raylib.h"
+
+void Scene::draw() {
+    DrawFPS(10, 10);
+}
+

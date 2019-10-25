@@ -8,6 +8,7 @@
 
 #include "raylib.h"
 #include "Window.hpp"
+#include "Level1.hpp"
 
 int main(void)
 {
@@ -15,6 +16,8 @@ int main(void)
     auto window = Window();
     window.toggleFullscreen();
     window.setCursorEnabled(false);
+    
+    auto lvl = Level1();
 
     // Main game loop
     while (!WindowShouldClose()) {
@@ -22,6 +25,8 @@ int main(void)
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
+        lvl.draw();
+        lvl.update(GetFrameTime());
 
         EndDrawing();
     }
