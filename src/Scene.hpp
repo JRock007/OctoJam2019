@@ -14,7 +14,8 @@ public:
 protected:
     Scene();
     ~Scene();
-    Vector2 getInputAcceleration();
+    float getInputAngle();
+    float getInputAmplitude();
     GhostAction getInputAction();
 
     Ghost ghost = Ghost();

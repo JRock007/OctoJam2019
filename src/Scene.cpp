@@ -32,29 +32,76 @@ void Scene::update(float dt) {
     ghost.update(dt);
 }
 
-Vector2 Scene::getInputAcceleration() {
-    /**
-     Get which direction the user is trying to go to
-     Key names use qwerty input, but adapt to other keyboards
-     */
+float Scene::getInputAngle() {
+    if (IsGamepadAvailable(GAMEPAD_PLAYER1)) {
+        // Joystick input
+        float x = GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_X);
+        float y = GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_Y);
+        return std::atan2(y, x);
+    } else {
+        // Keyboard input
+        bool pressingRight = IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D);
+        bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
+        bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
+        bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
+
+        // Diagonal
+        if (pressingUp && pressingRight) {
+            return M_PI / 4;
+        }
+        if (pressingUp && pressingLeft) {
+            return 3 * M_PI / 4;
+        }
+        if (pressingDown && pressingRight) {
+            return 7 * M_PI / 4;
+        }
+        if (pressingDown && pressingLeft) {
+            return 5 * M_PI / 4;
+        }
+
+        // Straight
+        if (pressingUp) {
+            return M_PI / 2;
+        }
+        if (pressingDown) {
+            return 3 * M_PI / 2;
+        }
+        if (pressingRight) {
+            return 0;
+        }
+        if (pressingLeft) {
+            return M_PI;
+        }
+    }
+
+    // Just in case
+    return 0;
+}
+
+float Scene::getInputAmplitude() {
+    bool pressingRight = IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D);
+    bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
+    bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
+    bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
+
     float xAccel = 0;
     float yAccel = 0;
 
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        xAccel += GHOST_ACCEL;
-    }
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+    if (pressingUp) {
         xAccel -= GHOST_ACCEL;
     }
-
-    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
-        yAccel -= GHOST_ACCEL;
+    if (pressingDown) {
+        xAccel += GHOST_ACCEL;
     }
-    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+
+    if (pressingRight) {
         yAccel += GHOST_ACCEL;
     }
+    if (pressingLeft) {
+        yAccel -= GHOST_ACCEL;
+    }
 
-    return Vector2{xAccel, yAccel};
+    return std::sqrt(std::pow(xAccel, 2) + std::pow(yAccel, 2));
 }
 
 GhostAction Scene::getInputAction() {

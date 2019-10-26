@@ -23,33 +23,37 @@ void Ghost::update(float dt)
     updateAcceleration(dt);
     updateSpeed(dt);
 
-    float dX = speed.x * dt;
-    float dY = speed.y * dt;
+    float dX = vx * dt;
+    float dY = vy * dt;
     x += dX;
     y += dY;
 }
 
 void Ghost::updateSpeed(float dt) {
-    speed.x += accel.x * dt;
-    speed.y += accel.y * dt;
+    vx += (ax + dashAx) * dt;
+    vy += (ay + dashAy) * dt;
 
-    speed.x *= GHOST_FRICTION;
-    speed.y *= GHOST_FRICTION;
+    vx *= GHOST_FRICTION;
+    vy *= GHOST_FRICTION;
 
-    speed.x = std::fmin(speed.x, GHOST_MAX_SPEED);
-    speed.x = std::fmax(speed.x, -GHOST_MAX_SPEED);
+    vx = std::fmin(vx, GHOST_MAX_SPEED);
+    vx = std::fmax(vx, -GHOST_MAX_SPEED);
 
-    speed.y = std::fmin(speed.y, GHOST_MAX_SPEED);
-    speed.y = std::fmax(speed.y, -GHOST_MAX_SPEED);
+    vy = std::fmin(vy, GHOST_MAX_SPEED);
+    vy = std::fmax(vy, -GHOST_MAX_SPEED);
 }
 
 void Ghost::updateAcceleration(float dt) {
-    accel.x *= GHOST_FRICTION;
-    accel.y *= GHOST_FRICTION;
+    ax *= GHOST_FRICTION;
+    ay *= GHOST_FRICTION;
+
+    dashAx *= GHOST_FRICTION;
+    dashAy *= GHOST_FRICTION;
 }
 
-void Ghost::setAcceleration(Vector2 accel) {
-    this->accel = accel;
+void Ghost::setAcceleration(float angle, float amplitude) {
+    ax = amplitude * std::cos(angle);
+    ay = -amplitude * std::sin(angle);
 }
 
 void Ghost::doAction(GhostAction action) {
@@ -59,7 +63,7 @@ void Ghost::doAction(GhostAction action) {
             break;
 
         case GhostAction::dash:
-            std::cout << "Dash" << std::endl;
+            dash();
             break;
         
         case GhostAction::shush:
@@ -72,5 +76,17 @@ void Ghost::doAction(GhostAction action) {
             
         case GhostAction::none:
             break;
+    }
+}
+
+void Ghost::dash() {
+    std::cout << "Dash" << std::endl;
+
+    if (ay == x && ay == 0) {
+        // Don't dash if we're not moving
+    } else {
+        float angle = std::atan2(-ay, ax);
+        dashAx = GHOST_DASH_ACCEL * std::cos(angle);
+        dashAy = -GHOST_DASH_ACCEL * std::sin(angle);
     }
 }
