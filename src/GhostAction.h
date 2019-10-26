@@ -1,5 +1,5 @@
 //
-//  Node.hpp
+//  GhostAction.h
 //  OctoJam2019
 //
 //  Created by Jean-Romain on 25/10/2019.
@@ -8,10 +8,10 @@
 
 #pragma once
 
-class Node {
-public:
-    Node();
-    virtual ~Node();
-    virtual void draw();
-    virtual void update(float dt);
-};
+typedef enum : int {
+    none,
+    interact,
+    shush,
+    dash,
+    fusrodah,
+} GhostAction;

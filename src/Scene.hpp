@@ -7,10 +7,22 @@
 //
 
 #pragma once
+#include <vector>
+#include "raylib.h"
+#include "Node.hpp"
+#include "GhostAction.h"
 #include "Node.hpp"
 
 class Scene: public Node {
 public:
-    virtual void draw() = 0;
+    void draw();
     virtual void update(float dt) = 0;
+
+protected:
+    Scene();
+    ~Scene();
+    Vector2 getInputAcceleration();
+    GhostAction getInputAction();
+
+    std::vector<Node> nodes;
 };

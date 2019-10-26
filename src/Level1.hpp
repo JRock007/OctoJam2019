@@ -1,5 +1,5 @@
 //
-//  Node.hpp
+//  Level1.hpp
 //  OctoJam2019
 //
 //  Created by Jean-Romain on 25/10/2019.
@@ -7,11 +7,10 @@
 //
 
 #pragma once
+#include "Scene.hpp"
 
-class Node {
+class Level1: public Scene {
 public:
-    Node();
-    virtual ~Node();
-    virtual void draw();
-    virtual void update(float dt);
+    void draw();
+    void update(float dt);
 };

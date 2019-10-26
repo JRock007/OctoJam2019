@@ -8,10 +8,10 @@
 
 #include "Node.hpp"
 
-void Node::draw()
-{
-}
+Node::Node() {}
 
-void Node::update(float dt)
-{
-}
+Node::~Node() {}
+
+void Node::draw() {}
+
+void Node::update(float dt) {}
