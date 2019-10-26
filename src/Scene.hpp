@@ -31,4 +31,5 @@ protected:
 
 private:
     float computeAngle(bool left, bool right, bool up, bool down);
+    float computeAmplitude(bool left, bool right, bool up, bool down);
 };
