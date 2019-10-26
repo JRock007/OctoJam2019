@@ -55,6 +55,29 @@ void Scene::update(float dt) {
             highlightedInteractable->setHighlight(true);
         }
     }
+
+    // Pass inputs to ghost
+    auto action = Scene::getInputAction();
+    if (action == GhostAction::interact) {
+        // Catch this and directly interact with the item
+        InteractionType type = getInteractionType(highlightedInteractable);
+
+        if (highlightedInteractable != nullptr && type != InteractionType::unknown) {
+            highlightedInteractable->interact();
+
+            auto neighbors = getNeighbors(*highlightedInteractable);
+            for (int i = 0; i < neighbors.size(); i++) {
+                neighbors[i]->reactToInteraction(type);
+            }
+        }
+    } else if (action != GhostAction::none) {
+        ghost.doAction(action);
+    }
+
+    // Make ghost move
+    auto angle = Scene::getInputAngle();
+    auto amplitude = Scene::getInputAmplitude();
+    ghost.setAcceleration(angle, amplitude);
 }
 
 void Scene::setMapSize(float width, float heigth) {
