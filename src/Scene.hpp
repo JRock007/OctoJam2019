@@ -18,6 +18,7 @@ protected:
     float getInputAngle();
     float getInputAmplitude();
     GhostAction getInputAction();
+
 	// Spawn table to a given location
 	void spawnTable(float x, float y);
 	// Spawn person to a random table
@@ -27,4 +28,7 @@ protected:
     std::vector<std::shared_ptr<Node>> nodes;
 	std::vector<std::shared_ptr<Table>> tables;
 	std::vector<std::shared_ptr<Person>> persons;
+
+private:
+    float computeAngle(bool left, bool right, bool up, bool down);
 };
