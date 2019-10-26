@@ -1,13 +1,20 @@
 #include "Scene.hpp"
 #include "Constants.hpp"
+#include <cstdlib>
 
 Scene::Scene() {};
 
 Scene::~Scene() {
     // Release all the pointers we have
-    for (auto node: nodes) {
-        node.reset();
-    }
+	for (auto node : nodes) {
+		node.reset();
+	}
+	for (auto table : tables) {
+		table.reset();
+	}
+	for (auto person : persons) {
+		person.reset();
+	}
 };
 
 void Scene::draw() {
@@ -80,4 +87,23 @@ GhostAction Scene::getInputAction() {
     }
 
     return GhostAction::none;
+}
+
+void Scene::spawnTable(float x, float y)
+{
+	Table table(x, y);
+	std::shared_ptr<Table> ptable(new Table(x, y));
+	tables.push_back(std::make_shared<Table>(table));
+	nodes.push_back(std::make_shared<Table>(table));
+}
+
+void Scene::spawnPerson(Table& table)
+{
+	// Spawn a person
+	Vector2 nextPosition = table.getNextPosition();
+	Person person(nextPosition.x, nextPosition.y);
+	person.enter(); // Toggle visibility on
+
+	persons.push_back(std::make_shared<Person>(person));
+	nodes.push_back(std::make_shared<Person>(person));
 }
