@@ -3,6 +3,9 @@
 #include "InteractionType.hpp"
 
 Level1::Level1(Window& window) : Scene(window) {
+    // Set map size so the camera can move
+    setMapSize(1.5 * window.getWidth(), 2 * window.getHeight());
+
     // Create some nodes for testing
 	spawnLamp(800, 500);
 
@@ -49,6 +52,7 @@ void Level1::update(float dt) {
         ghost.doAction(action);
     }
 
+    // Make ghost move
     auto angle = Scene::getInputAngle();
     auto amplitude = Scene::getInputAmplitude();
     ghost.setAcceleration(angle, amplitude);

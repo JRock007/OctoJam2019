@@ -14,7 +14,6 @@ Scene::Scene(Window& window) :
     mapWidth(window.getWidth()),
     mapHeight(window.getHeight())
 {
-    setMapSize(2 * window.getWidth(), 2 * window.getHeight());
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
 
