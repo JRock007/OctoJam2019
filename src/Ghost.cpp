@@ -56,6 +56,11 @@ void Ghost::clamp(float minX, float minY, float maxX, float maxY) {
     }
 }
 
+void Ghost::moveTo(float x, float y) {
+    this->x = x;
+    this->y = y;
+}
+
 void Ghost::setAcceleration(float angle, float amplitude) {
     ax = amplitude * std::cos(angle);
     ay = -amplitude * std::sin(angle);

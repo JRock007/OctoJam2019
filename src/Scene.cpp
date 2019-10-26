@@ -308,3 +308,8 @@ void Scene::spawnBook(float x, float y)
     interactables.push_back(book);
     nodes.push_back(book);
 }
+
+void Scene::moveGhostTo(float x, float y)
+{
+    ghost.moveTo(x, y);
+}

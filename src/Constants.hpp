@@ -15,3 +15,5 @@
 #define CAMERA_CATCHUP_RATIO 2
 
 #define MAP_BORDER_SIZE 20
+
+#define TILE_SIZE 16
