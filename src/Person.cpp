@@ -3,6 +3,8 @@
 Person::Person() : Entity()
 {
     disabled = false;
+	w = 10;
+	h = 20;
 }
 
 Person::~Person()
@@ -22,5 +24,7 @@ void Person::enter()
 
 void Person::draw()
 {
-    DrawRectangle(x, y, 10, 20, BLUE);
+	if (disabled) return;
+
+    DrawRectangle(x, y, w, h, BLUE);
 }

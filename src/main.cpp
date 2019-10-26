@@ -10,10 +10,15 @@
 #include "Window.hpp"
 #include "Level1.hpp"
 #include "Person.hpp"
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
 
 int main(void)
 {
     // Initialization
+	std::srand(std::time(nullptr));
+
     auto window = Window();
     window.toggleFullscreen();
     window.setCursorEnabled(false);
