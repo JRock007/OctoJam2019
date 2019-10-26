@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  OctoJam2019
-//
-//  Created by Jean-Romain on 25/10/2019.
-//  Copyright © 2019 JustKodding. All rights reserved.
-//
-
 #include "raylib.h"
 #include "Window.hpp"
 #include "Level1.hpp"
