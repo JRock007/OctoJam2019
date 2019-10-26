@@ -3,7 +3,7 @@
 
 class Level1: public Scene {
 public:
-    Level1();
+    Level1(Window&);
     ~Level1();
 
     virtual void draw() override;

@@ -34,3 +34,11 @@ void Window::toggleFullscreen() {
 bool Window::isFullscreen() {
     return _isFullscreen;
 }
+
+float Window::getWidth() {
+    return GetScreenWidth();
+}
+
+float Window::getHeight() {
+    return GetScreenHeight();
+}

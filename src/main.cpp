@@ -15,16 +15,26 @@ int main(void)
     window.toggleFullscreen();
     window.setCursorEnabled(false);
     
-    auto lvl = Level1();
+    auto lvl = Level1(window);
     // Main game loop
     while (!WindowShouldClose()) {
-        // Update
-        BeginDrawing();
-
         ClearBackground(RAYWHITE);
-        lvl.draw();
+
+        // Update
         lvl.update(GetFrameTime());
 
+        // Draw
+        BeginDrawing();
+            // Draw nodes
+            BeginMode2D(lvl.getCamera());
+            lvl.draw();
+            EndMode2D();
+
+            DrawLine(lvl.getCamera().target.x, -window.getHeight(), lvl.getCamera().target.x, window.getHeight(), GREEN);
+            DrawLine(-window.getWidth(), lvl.getCamera().target.y, window.getWidth(), lvl.getCamera().target.y, GREEN);
+
+            // Draw HUD
+            DrawFPS(10, 10);
         EndDrawing();
     }
 

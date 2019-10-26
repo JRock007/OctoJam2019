@@ -5,7 +5,14 @@
 #include "math.h"
 #include <cmath>
 
-Scene::Scene() {};
+Scene::Scene(Window& window) : window(window) {
+    camera.offset = Vector2{0, 0};
+    camera.target = Vector2{0, 0};
+
+    camera.rotation = 0;
+    camera.zoom = 0.5f;
+    camera.zoom = 1;
+};
 
 Scene::~Scene() {
     // Release all the pointers we have
@@ -21,8 +28,6 @@ Scene::~Scene() {
 };
 
 void Scene::draw() {
-    DrawFPS(10, 10);
-
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
         node->draw();
@@ -39,6 +44,7 @@ void Scene::update(float dt) {
     }
 
     ghost.update(dt);
+    camera.target = Vector2{ghost.getX(), ghost.getY()};
 
 	// Highlight closer item to ghost below a given range
 	float range = 300;
@@ -77,6 +83,10 @@ float Scene::getEntityDistance(Entity e1, Entity e2)
 		e1.getY() + e1.getH() / 2,
 		e2.getX() + e2.getW() / 2,
 		e2.getY() + e2.getH() / 2);
+}
+
+Camera2D& Scene::getCamera() {
+    return camera;
 }
 
 float Scene::getInputAngle() {
@@ -136,7 +146,6 @@ float Scene::getInputAmplitude() {
         bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
         bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
         amplitude = computeAmplitude(pressingLeft, pressingRight, pressingUp, pressingDown);
-
     }
 
     return amplitude;
