@@ -4,6 +4,7 @@
 #include "Person.hpp"
 #include <cstdlib>
 #include <iostream>
+#include "TextureManager.hpp"
 #include <ctime>
 
 int main(void)
@@ -16,6 +17,9 @@ int main(void)
     window.setCursorEnabled(false);
     
     auto lvl = Level1(window);
+
+	TextureManager::loadTexture("tileset", "assets/Tileset_Prototype.png");
+
     // Main game loop
     while (!WindowShouldClose()) {
         ClearBackground(RAYWHITE);
