@@ -46,6 +46,16 @@ float Scene::getInputAngle() {
         // Joystick input
         float x = GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_X);
         float y = -GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_Y);
+
+        // D-Pad as backup
+        if (x == 0 && y == 0) {
+            bool pressingRight = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT);
+            bool pressingLeft = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_LEFT);
+            bool pressingUp = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_UP);
+            bool pressingDown = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_DOWN);
+            return computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
+        }
+
         return std::atan2(y, x);
     } else {
         // Keyboard input
@@ -53,37 +63,42 @@ float Scene::getInputAngle() {
         bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
         bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
         bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
-
-        // Diagonal
-        if (pressingUp && pressingRight) {
-            return M_PI / 4;
-        }
-        if (pressingUp && pressingLeft) {
-            return 3 * M_PI / 4;
-        }
-        if (pressingDown && pressingRight) {
-            return 7 * M_PI / 4;
-        }
-        if (pressingDown && pressingLeft) {
-            return 5 * M_PI / 4;
-        }
-
-        // Straight
-        if (pressingUp) {
-            return M_PI / 2;
-        }
-        if (pressingDown) {
-            return 3 * M_PI / 2;
-        }
-        if (pressingRight) {
-            return 0;
-        }
-        if (pressingLeft) {
-            return M_PI;
-        }
+        return computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
     }
 
     // Just in case
+    return 0;
+}
+
+float Scene::computeAngle(bool left, bool right, bool up, bool down) {
+    // Diagonal
+    if (up && right) {
+        return M_PI / 4;
+    }
+    if (up && left) {
+        return 3 * M_PI / 4;
+    }
+    if (down && right) {
+        return 7 * M_PI / 4;
+    }
+    if (down && left) {
+        return 5 * M_PI / 4;
+    }
+
+    // Straight
+    if (up) {
+        return M_PI / 2;
+    }
+    if (down) {
+        return 3 * M_PI / 2;
+    }
+    if (right) {
+        return 0;
+    }
+    if (left) {
+        return M_PI;
+    }
+
     return 0;
 }
 
@@ -126,19 +141,25 @@ GhostAction Scene::getInputAction() {
      Only triggered when pressing the key for the first time, holding it doesn't work
      Key names use qwerty input, but adapt to other keyboards
      */
-    if (IsKeyPressed(KEY_E)) {
+    if (IsKeyPressed(KEY_E)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) {
         return GhostAction::interact;
     }
 
-    if (IsKeyPressed(KEY_Q)) {
+    if (IsKeyPressed(KEY_Q)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_RIGHT_FACE_LEFT)) {
         return GhostAction::shush;
     }
 
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (IsKeyPressed(KEY_SPACE)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_TRIGGER_2)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_RIGHT_TRIGGER_2)) {
         return GhostAction::dash;
     }
 
-    if (IsKeyPressed(KEY_ENTER)) {
+    if (IsKeyPressed(KEY_ENTER)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_TRIGGER_1)
+        || IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_RIGHT_TRIGGER_1)) {
         return GhostAction::fusrodah;
     }
 

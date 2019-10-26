@@ -3,7 +3,7 @@
 
 class Entity: public Node {
 public:
-	Entity(float x, float y, float w, float h);
+	Entity(float x=0, float y=0, float w=0, float h=0);
     ~Entity();
     // Perform render operation
     virtual void draw() override;

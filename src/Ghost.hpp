@@ -26,8 +26,11 @@ private:
     float vx = 0;
     float vy = 0;
 
+    float dashCooldown = 0;
+
     void updateAcceleration(float dt);
     void updateSpeed(float);
+    void updateCooldown(float);
 
     void dash();
 };
