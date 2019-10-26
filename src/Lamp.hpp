@@ -2,18 +2,20 @@
 
 #include "Interactable.hpp"
 #include "Entity.hpp"
+#include "Table.hpp"
 
 class Lamp:
     public Interactable,
     public Entity
 {
 public:
-    Lamp(Table table);
+    Lamp(Table& table);
     ~Lamp();
     void interact();
     void toggle();
-    bool isTurnedOn() { return turnedOn; }
+	bool isTurnedOn() { return turnedOn; }
+
 protected:
-    Table table;
-    bool turnedOn;
+    Table& table;
+	bool turnedOn;
 };

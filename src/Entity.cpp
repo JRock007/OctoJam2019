@@ -8,7 +8,9 @@
 
 #include "Entity.hpp"
 
-Entity::Entity()
+Entity::Entity() :
+	x(0.f),
+	y(0.f)
 {
 
 }

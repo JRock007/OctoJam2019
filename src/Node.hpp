@@ -6,6 +6,9 @@
 //  Copyright © 2019 JustKodding. All rights reserved.
 //
 
+#pragma once
+#include "raylib.h"
+
 class Node {
 public:
     virtual void draw();

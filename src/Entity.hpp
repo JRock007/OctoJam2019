@@ -6,6 +6,7 @@
 //  Copyright © 2019 JustKodding. All rights reserved.
 //
 
+#pragma once
 #include "Node.hpp"
 
 class Entity: public Node {

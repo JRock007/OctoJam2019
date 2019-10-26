@@ -8,6 +8,7 @@
 
 #include "raylib.h"
 #include "Window.hpp"
+#include "Person.hpp"
 
 int main(void)
 {
@@ -15,6 +16,7 @@ int main(void)
     auto window = Window();
     window.toggleFullscreen();
     window.setCursorEnabled(false);
+	auto person = Person();
 
     // Main game loop
     while (!WindowShouldClose()) {
@@ -22,6 +24,7 @@ int main(void)
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
+		person.draw();
 
         EndDrawing();
     }

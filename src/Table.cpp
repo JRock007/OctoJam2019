@@ -5,12 +5,12 @@ Table::Table() : Entity()
 
 }
 
-Table::Table()
+Table::~Table()
 {
 
 }
 
-Vector2 getNextPosition()
+Vector2 Table::getNextPosition()
 {
-    return Vector2{0f, 0f};
+	return Vector2{ 0.f, 0.f };
 }

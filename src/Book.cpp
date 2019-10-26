@@ -1,8 +1,9 @@
 #include "Book.hpp"
 
-Book::Book(Table table) : Entity()
+Book::Book(Table& table) : 
+	Entity(),
+	table(table)
 {
-    this->table = table
 }
 
 Book::~Book()
@@ -15,12 +16,12 @@ void Book::interact()
 
 }
 
-void flip()
+void Book::flip()
 {
 
 }
 
-void drop()
+void Book::drop()
 {
 
 }

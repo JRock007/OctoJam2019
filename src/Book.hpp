@@ -9,12 +9,12 @@ class Book:
     public Entity
 {
 public:
-    Book(Table table);
+    Book(Table& table);
     ~Book();
     void interact();
     void flip();
     void drop();
 protected:
     // The book is attached to a table
-    Table table;
+    Table& table;
 };

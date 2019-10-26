@@ -19,3 +19,8 @@ void Person::enter()
 {
     disabled = false;
 }
+
+void Person::draw()
+{
+    DrawRectangle(x, y, 10, 20, BLUE);
+}

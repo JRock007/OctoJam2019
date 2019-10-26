@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.hpp"
+#include "raylib.h"
 
 class Person:
     public Entity
@@ -11,6 +12,7 @@ public:
     void leave();
     // Orders to enter the room
     void enter();
+    void draw();
 	bool isDisabled() { return disabled; }
 protected:
 	bool disabled;
