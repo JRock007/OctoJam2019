@@ -17,5 +17,6 @@ void Level1::draw() {
 }
 
 void Level1::update(float dt) {
-    
+    Scene::getInputAcceleration();
+    Scene::getInputAction();
 }
