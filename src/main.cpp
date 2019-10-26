@@ -30,9 +30,6 @@ int main(void)
             lvl.draw();
             EndMode2D();
 
-            DrawLine(lvl.getCamera().target.x, -window.getHeight(), lvl.getCamera().target.x, window.getHeight(), GREEN);
-            DrawLine(-window.getWidth(), lvl.getCamera().target.y, window.getWidth(), lvl.getCamera().target.y, GREEN);
-
             // Draw HUD
             DrawFPS(10, 10);
         EndDrawing();
