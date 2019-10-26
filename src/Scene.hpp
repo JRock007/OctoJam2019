@@ -7,6 +7,8 @@
 #include "Entities.hpp"
 #include "Window.hpp"
 #include "GhostCamera.hpp"
+#include "Constants.hpp"
+#include "InteractionType.hpp"
 #include <memory>
 
 class Scene: public Node {
@@ -38,8 +40,12 @@ protected:
 	// Spawn a book to a given location
 	void spawnBook(float x, float y);
 
+    // Find neighbors of an interactable node
+    std::vector<Person*> getNeighbors(Interactable&, float range=EVENT_ACTION_RANGE);
     // Get closest interactable object to entity
     Interactable* getClosestNeighbor(Entity& entity, bool resetHighlights=true);
+    // Get the kind of interaction an interactable instance triggers
+    InteractionType getInteractionType(Interactable* interactable);
 	// Get distance between two entities
 	float getEntityDistance(Entity e1, Entity e2);
 

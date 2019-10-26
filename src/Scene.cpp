@@ -53,6 +53,18 @@ void Scene::update(float dt) {
     }
 }
 
+std::vector<Person*> Scene::getNeighbors(Interactable& interactable, float range) {
+    std::vector<Person*> neighbors = std::vector<Person*>();
+
+    for (int i(0); i < persons.size(); i++) {
+        float dist = getEntityDistance(interactable, *persons[i]);
+        if (dist <= range) {
+            neighbors.push_back(persons[i].get());
+        }
+    }
+
+    return neighbors;
+}
 
 Interactable* Scene::getClosestNeighbor(Entity& entity, bool resetHighlights) {
     Interactable* closestNeighbor = nullptr;
@@ -75,9 +87,19 @@ Interactable* Scene::getClosestNeighbor(Entity& entity, bool resetHighlights) {
 
     return closestNeighbor;
 }
+
+InteractionType Scene::getInteractionType(Interactable* interactable) {
+    if (Book* book = dynamic_cast<Book*>(interactable)) {
+        return InteractionType::book;
+    } else if (Lamp* lamp = dynamic_cast<Lamp*>(interactable)) {
+        if (lamp->isTurnedOn()) {
+            return InteractionType::lampTurnOn;
         } else {
             return InteractionType::lampTurnOff;
         }
+    }
+
+    return InteractionType::unknown;
 }
 
 float Scene::getEntityDistance(Entity e1, Entity e2)

@@ -1,5 +1,6 @@
 #include "Level1.hpp"
 #include "Entities.hpp"
+#include "InteractionType.hpp"
 
 Level1::Level1(Window& window) : Scene(window) {
     // Create some nodes for testing
@@ -34,8 +35,15 @@ void Level1::update(float dt) {
     auto action = Scene::getInputAction();
     if (action == GhostAction::interact) {
         // Catch this and directly interact with the item
-        if (highlightedInteractable != nullptr) {
+        InteractionType type = getInteractionType(highlightedInteractable);
+
+        if (highlightedInteractable != nullptr && type != InteractionType::unknown) {
             highlightedInteractable->interact();
+
+            auto neighbors = getNeighbors(*highlightedInteractable);
+            for (int i = 0; i < neighbors.size(); i++) {
+                neighbors[i]->reactToInteraction(type);
+            }
         }
     } else if (action != GhostAction::none) {
         ghost.doAction(action);

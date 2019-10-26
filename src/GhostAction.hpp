@@ -1,6 +1,6 @@
 #pragma once
 
-typedef enum : int {
+typedef enum {
     none,
     interact,
     shush,
