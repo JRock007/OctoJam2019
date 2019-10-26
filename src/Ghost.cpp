@@ -20,6 +20,7 @@ void Ghost::update(float dt)
 {
     updateAcceleration(dt);
     updateSpeed(dt);
+    updateCooldown(dt);
 
     float dX = vx * dt;
     float dY = vy * dt;
@@ -47,6 +48,12 @@ void Ghost::updateAcceleration(float dt) {
 
     dashAx *= GHOST_FRICTION;
     dashAy *= GHOST_FRICTION;
+}
+
+void Ghost::updateCooldown(float dt) {
+    if (dashCooldown > 0) {
+        dashCooldown -= dt;
+    }
 }
 
 void Ghost::setAcceleration(float angle, float amplitude) {
@@ -78,13 +85,14 @@ void Ghost::doAction(GhostAction action) {
 }
 
 void Ghost::dash() {
-    std::cout << "Dash" << std::endl;
-
     if (ay == x && ay == 0) {
         // Don't dash if we're not moving
+    } else if (dashCooldown > 0) {
+        // Cooldown isn't over yet
     } else {
         float angle = std::atan2(-ay, ax);
         dashAx = GHOST_DASH_ACCEL * std::cos(angle);
         dashAy = -GHOST_DASH_ACCEL * std::sin(angle);
+        dashCooldown = GHOST_DASH_COOLDOWN;
     }
 }
