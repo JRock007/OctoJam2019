@@ -1,10 +1,8 @@
 #include "Person.hpp"
 
-Person::Person() : Entity()
+Person::Person(float x, float y) : Entity(x, y, 10, 20)
 {
     disabled = false;
-	w = 10;
-	h = 20;
 }
 
 Person::~Person()

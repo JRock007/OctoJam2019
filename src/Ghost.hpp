@@ -9,7 +9,7 @@ class Ghost:
     public Entity
 {
 public:
-    Ghost();
+    Ghost(float x, float y);
     ~Ghost();
 
 	virtual void draw();

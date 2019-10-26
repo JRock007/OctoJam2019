@@ -1,9 +1,7 @@
 #include "Table.hpp"
 
-Table::Table() : Entity()
+Table::Table(float x, float y) : Entity(x, y, 100, 50)
 {
-	w = 100;
-	h = 50;
 }
 
 Table::~Table()

@@ -2,10 +2,8 @@
 #include "Constants.hpp"
 #include <iostream>
 
-Ghost::Ghost() : Entity()
+Ghost::Ghost(float x, float y) : Entity(x, y, 30, 40)
 {
-	w = 30;
-	h = 40;
 }
 
 Ghost::~Ghost()

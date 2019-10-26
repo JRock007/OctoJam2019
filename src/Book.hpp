@@ -9,11 +9,12 @@ class Book:
     public Entity
 {
 public:
-    Book(Table& table);
+    Book(float x, float y, Table& table);
     ~Book();
     void interact();
-    void flip();
+	void flip();
     void drop();
+	virtual void draw() override;
 protected:
     // The book is attached to a table
     Table& table;

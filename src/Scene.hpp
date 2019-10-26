@@ -5,6 +5,7 @@
 #include "GhostAction.hpp"
 #include "Node.hpp"
 #include "Entities.hpp"
+#include <memory>
 
 class Scene: public Node {
 public:
@@ -17,6 +18,6 @@ protected:
     Vector2 getInputAcceleration();
     GhostAction getInputAction();
 
-    Ghost ghost = Ghost();
+    Ghost ghost = Ghost(1280/2, 720/2);
     std::vector<std::shared_ptr<Node>> nodes;
 };

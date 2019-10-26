@@ -1,7 +1,7 @@
 #include "Lamp.hpp"
 
-Lamp::Lamp(Table& table) : 
-	Entity(),
+Lamp::Lamp(float x, float y, Table& table) : 
+	Entity(x, y, 10, 40),
 	table(table),
 	turnedOn(true)
 {

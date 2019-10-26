@@ -1,7 +1,7 @@
 #include "Book.hpp"
 
-Book::Book(Table& table) : 
-	Entity(),
+Book::Book(float x, float y, Table& table) : 
+	Entity(x, y, 20, 20),
 	table(table)
 {
 }
@@ -24,4 +24,9 @@ void Book::flip()
 void Book::drop()
 {
 
+}
+
+void Book::draw()
+{
+	DrawRectangle(x, y, w, h, DARKGREEN);
 }
