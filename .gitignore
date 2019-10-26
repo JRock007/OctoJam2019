@@ -140,3 +140,6 @@ DerivedData/
 
 # End of https://www.gitignore.io/api/c++,xcode,macos,windows,visualstudiocode
 RaylibGame.vcxproj
+RaylibGame.rc
+RaylibGame.aps
+ClassDiagram.cd
