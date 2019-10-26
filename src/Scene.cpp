@@ -80,32 +80,66 @@ float Scene::getEntityDistance(Entity e1, Entity e2)
 }
 
 float Scene::getInputAngle() {
+    float angle = 0;
+
     if (IsGamepadAvailable(GAMEPAD_PLAYER1)) {
         // Joystick input
         float x = GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_X);
         float y = -GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_Y);
+        angle = std::atan2(y, x);
+    }
 
+    if (IsGamepadAvailable(GAMEPAD_PLAYER1) && angle == 0) {
         // D-Pad as backup
-        if (x == 0 && y == 0) {
-            bool pressingRight = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT);
-            bool pressingLeft = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_LEFT);
-            bool pressingUp = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_UP);
-            bool pressingDown = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_DOWN);
-            return computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
-        }
+        bool pressingRight = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT);
+        bool pressingLeft = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_LEFT);
+        bool pressingUp = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_UP);
+        bool pressingDown = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_DOWN);
+        angle = computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
+    }
 
-        return std::atan2(y, x);
-    } else {
-        // Keyboard input
+    if (angle == 0) {
+        // Keyboard as last hope
         bool pressingRight = IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D);
         bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
         bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
         bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
-        return computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
+        angle = computeAngle(pressingLeft, pressingRight, pressingUp, pressingDown);
     }
 
-    // Just in case
-    return 0;
+    return angle;
+}
+
+float Scene::getInputAmplitude() {
+    float amplitude = 0;
+
+    if (IsGamepadAvailable(GAMEPAD_PLAYER1)) {
+        // Joystick input
+        float xAccel = GHOST_ACCEL * GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_X);
+        float yAccel = GHOST_ACCEL * GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_Y);
+        amplitude = std::sqrt(std::pow(xAccel, 2) + std::pow(yAccel, 2));
+    }
+
+    if (IsGamepadAvailable(GAMEPAD_PLAYER1) && amplitude == 0) {
+        // D-Pad as backup
+        bool pressingRight = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT);
+        bool pressingLeft = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_LEFT);
+        bool pressingUp = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_UP);
+        bool pressingDown = IsGamepadButtonDown(GAMEPAD_PLAYER1, GAMEPAD_BUTTON_LEFT_FACE_DOWN);
+        amplitude = computeAmplitude(pressingLeft, pressingRight, pressingUp, pressingDown);
+    }
+
+    if (amplitude == 0) {
+        // Keyboard as last hope
+        bool pressingRight = IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D);
+        bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
+        bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
+        bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
+        amplitude = computeAmplitude(pressingLeft, pressingRight, pressingUp, pressingDown);
+
+    }
+
+    return amplitude;
 }
 
 float Scene::computeAngle(bool left, bool right, bool up, bool down) {
@@ -140,34 +174,22 @@ float Scene::computeAngle(bool left, bool right, bool up, bool down) {
     return 0;
 }
 
-float Scene::getInputAmplitude() {
+float Scene::computeAmplitude(bool left, bool right, bool up, bool down) {
     float xAccel = 0;
     float yAccel = 0;
 
-    if (IsGamepadAvailable(GAMEPAD_PLAYER1)) {
-        // Joystick input
-        xAccel = GHOST_ACCEL * GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_X);
-        yAccel = GHOST_ACCEL * GetGamepadAxisMovement(GAMEPAD_PLAYER1, GAMEPAD_AXIS_LEFT_Y);
-    } else {
-        // Keyboard input
-        bool pressingRight = IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D);
-        bool pressingLeft = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A);
-        bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
-        bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
+    if (up) {
+        xAccel -= GHOST_ACCEL;
+    }
+    if (down) {
+        xAccel += GHOST_ACCEL;
+    }
 
-        if (pressingUp) {
-            xAccel -= GHOST_ACCEL;
-        }
-        if (pressingDown) {
-            xAccel += GHOST_ACCEL;
-        }
-
-        if (pressingRight) {
-            yAccel += GHOST_ACCEL;
-        }
-        if (pressingLeft) {
-            yAccel -= GHOST_ACCEL;
-        }
+    if (right) {
+        yAccel += GHOST_ACCEL;
+    }
+    if (left) {
+        yAccel -= GHOST_ACCEL;
     }
 
     return std::sqrt(std::pow(xAccel, 2) + std::pow(yAccel, 2));
