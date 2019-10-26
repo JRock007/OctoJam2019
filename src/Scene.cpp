@@ -5,6 +5,7 @@
 #define _USE_MATH_DEFINES 
 #include "math.h"
 #include <cmath>
+#include <limits>
 
 Scene::Scene(Window& window) : window(window),
                                ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
@@ -41,28 +42,42 @@ void Scene::update(float dt) {
     camera.update(dt);
 
 	// Highlight closer item to ghost below a given range
-	if (interactables.size() > 0)
-	{
-		int minIdx = 0;
-		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
-		for (int i(0); i < interactables.size(); i++) {
-            if (interactables[i]->isHighlighted()) {
-                interactables[i]->setHighlight(false);
-            }
+    highlightedInteractable = getClosestNeighbor(ghost);
 
-            float dist = getEntityDistance(ghost, *interactables[i]);
-            if (dist < minDist) {
-                minDist = dist;
-				minIdx = i;
-			}
-		}
-		if (minDist <= GHOST_ACTION_RANGE) {
-			interactables[minIdx]->setHighlight(true);
-            highlightedInteractable = interactables[minIdx].get();
-        } else {
-            highlightedInteractable = nullptr;
+    if (highlightedInteractable != nullptr) {
+        float dist = getEntityDistance(ghost, *highlightedInteractable);
+
+        if (dist <= GHOST_ACTION_RANGE) {
+            highlightedInteractable->setHighlight(true);
         }
-	}
+    }
+}
+
+
+Interactable* Scene::getClosestNeighbor(Entity& entity, bool resetHighlights) {
+    Interactable* closestNeighbor = nullptr;
+
+    float minDist = std::numeric_limits<float>::max();;
+
+    for (int i(0); i < interactables.size(); i++) {
+        // Unhighlight interactable
+        if (resetHighlights && interactables[i]->isHighlighted()) {
+            interactables[i]->setHighlight(false);
+        }
+
+        // Compute dist and update pointer if necessary
+        float dist = getEntityDistance(entity, *interactables[i]);
+        if (dist < minDist) {
+            minDist = dist;
+            closestNeighbor = interactables[i].get();
+        }
+    }
+
+    return closestNeighbor;
+}
+        } else {
+            return InteractionType::lampTurnOff;
+        }
 }
 
 float Scene::getEntityDistance(Entity e1, Entity e2)

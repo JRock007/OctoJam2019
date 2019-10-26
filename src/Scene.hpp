@@ -38,6 +38,8 @@ protected:
 	// Spawn a book to a given location
 	void spawnBook(float x, float y);
 
+    // Get closest interactable object to entity
+    Interactable* getClosestNeighbor(Entity& entity, bool resetHighlights=true);
 	// Get distance between two entities
 	float getEntityDistance(Entity e1, Entity e2);
 
