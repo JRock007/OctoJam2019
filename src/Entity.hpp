@@ -8,7 +8,7 @@ public:
     // Perform render operation
     virtual void draw() override;
     // Perform update and logic
-    virtual void update(float dt);
+    virtual void update(float dt) override;
 
     // Reposition entity to a give x and y
     void setPosition(float x, float y);

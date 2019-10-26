@@ -9,7 +9,7 @@
 int main(void)
 {
     // Initialization
-	std::srand(std::time(nullptr));
+    std::srand((uint)std::time(nullptr));
 
     auto window = Window();
     window.toggleFullscreen();

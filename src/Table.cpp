@@ -25,16 +25,16 @@ Vector2 Table::getNextPosition()
 	// Horizontal or Vertical
 	if (prim)
 	{
-		int nextx = x + std::rand() % (int)w;
-		int nexty = y + (secd) ? 0 : h;
-		nextPosition = Vector2{ x, y };
+		float nextx = x + std::rand() % (int)w;
+		float nexty = y + ((secd) ? 0 : h);
+		nextPosition = Vector2{ nextx, nexty };
 	}
 	else
 	{
 		// Left or Right
-		int nextx = x + (secd) ? 0 : w;
-		int nexty = y + std::rand() % (int)h;
-		nextPosition = Vector2{ x, y };
+		float nextx = x + ((secd) ? 0 : w);
+		float nexty = y + std::rand() % (int)h;
+		nextPosition = Vector2{ nextx, nexty };
 	}
 
 	return nextPosition;
