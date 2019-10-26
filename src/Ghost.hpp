@@ -18,6 +18,9 @@ public:
     void setAcceleration(float angle, float amplitude);
     void doAction(GhostAction);
 
+    float getVx();
+    float getVy();
+
 private:
     float dashAx = 0;
     float dashAy = 0;
