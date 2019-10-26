@@ -27,6 +27,18 @@ void Ghost::update(float dt)
     move(dx, dy);
 }
 
+float Ghost::getVx() {
+    return vx;
+}
+float Ghost::getVy() {
+    return vy;
+}
+
+void Ghost::setAcceleration(float angle, float amplitude) {
+    ax = amplitude * std::cos(angle);
+    ay = -amplitude * std::sin(angle);
+}
+
 void Ghost::updateSpeed(float dt) {
     vx += (ax + dashAx) * dt;
     vy += (ay + dashAy) * dt;
@@ -53,11 +65,6 @@ void Ghost::updateCooldown(float dt) {
     if (dashCooldown > 0) {
         dashCooldown -= dt;
     }
-}
-
-void Ghost::setAcceleration(float angle, float amplitude) {
-    ax = amplitude * std::cos(angle);
-    ay = -amplitude * std::sin(angle);
 }
 
 void Ghost::doAction(GhostAction action) {

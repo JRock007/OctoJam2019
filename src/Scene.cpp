@@ -5,13 +5,8 @@
 #include "math.h"
 #include <cmath>
 
-Scene::Scene(Window& window) : window(window) {
-    camera.offset = Vector2{0, 0};
-    camera.target = Vector2{0, 0};
-
-    camera.rotation = 0;
-    camera.zoom = 0.5f;
-    camera.zoom = 1;
+Scene::Scene(Window& window) : window(window), camera(GhostCamera(ghost)) {
+    camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
 
 Scene::~Scene() {
@@ -39,7 +34,7 @@ void Scene::update(float dt) {
     }
 
     ghost.update(dt);
-    camera.target = Vector2{ghost.getX(), ghost.getY()};
+    camera.update(dt);
 
 	// Highlight closer item to ghost below a given range
 	float range = 300;
@@ -82,7 +77,7 @@ float Scene::getEntityDistance(Entity e1, Entity e2)
 }
 
 Camera2D& Scene::getCamera() {
-    return camera;
+    return camera.camera;
 }
 
 float Scene::getInputAngle() {

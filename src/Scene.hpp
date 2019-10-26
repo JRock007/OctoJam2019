@@ -6,6 +6,7 @@
 #include "Node.hpp"
 #include "Entities.hpp"
 #include "Window.hpp"
+#include "GhostCamera.hpp"
 #include <memory>
 
 class Scene: public Node {
@@ -20,7 +21,7 @@ protected:
     ~Scene();
 
     Window& window;
-    Camera2D camera = {0};
+    GhostCamera camera;
 
     float getInputAngle();
     float getInputAmplitude();
