@@ -1,6 +1,8 @@
 #include "Scene.hpp"
 #include "Constants.hpp"
 #include <cstdlib>
+#define _USE_MATH_DEFINES 
+#include "math.h"
 
 Scene::Scene() {};
 
