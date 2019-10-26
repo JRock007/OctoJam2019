@@ -18,12 +18,7 @@ Scene::~Scene() {
     // Release all the pointers we have
 	for (auto node : nodes) {
 		node.reset();
-	}
-	for (auto table : tables) {
-		table.reset();
-	}
-	for (auto person : persons) {
-		person.reset();
+        node = nullptr;
 	}
 };
 
@@ -52,20 +47,21 @@ void Scene::update(float dt) {
 	{
 		int minIdx = 0;
 		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
-		for (int i(0); i<interactables.size(); i++)
+		for (int i(0); i < interactables.size(); i++)
 		{
 			if (interactables[i]->isHighlighted())
-				interactables[i]->setHighlight(false);
+                interactables[i]->setHighlight(false);
 
-				if (getEntityDistance(ghost, *interactables[i]) < minDist)
+            float dist = getEntityDistance(ghost, *interactables[i]);
+            if (dist < minDist)
 			{
+                minDist = dist;
 				minIdx = i;
 			}
 		}
 		if (minDist <= range)
 		{
 			interactables[minIdx]->setHighlight(true);
-			//std::cout << closest.isHighlighted() << std::endl;
 		}
 	}
 }
@@ -261,14 +257,14 @@ void Scene::spawnPersonAroundTable(Table& table)
 
 void Scene::spawnLamp(float x, float y)
 {
-	Lamp lamp(x, y);
-	interactables.push_back(std::make_shared<Interactable>(lamp));
-	nodes.push_back(std::make_shared<Lamp>(lamp));
+    auto lamp = std::make_shared<Lamp>(Lamp(x, y));
+    interactables.push_back(lamp);
+    nodes.push_back(lamp);
 }
 
 void Scene::spawnBook(float x, float y)
 {
-	Book book(x, y);
-	interactables.push_back(std::make_shared<Interactable>(book));
-	nodes.push_back(std::make_shared<Book>(book));
+    auto book = std::make_shared<Book>(Book(x, y));
+    interactables.push_back(book);
+    nodes.push_back(book);
 }
