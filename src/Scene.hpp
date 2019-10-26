@@ -17,6 +17,7 @@ public:
     virtual void update(float dt) override;
 
     Camera2D& getCamera();
+    void setMapSize(float width, float heigth);
 
 protected:
     Scene(Window&);
@@ -24,6 +25,8 @@ protected:
 
     Window& window;
     GhostCamera camera;
+    float mapWidth;
+    float mapHeight;
 
     float getInputAngle();
     float getInputAmplitude();

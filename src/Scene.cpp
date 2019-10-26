@@ -7,10 +7,14 @@
 #include <cmath>
 #include <limits>
 
-Scene::Scene(Window& window) : window(window),
-                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
-                               camera(GhostCamera(ghost))
+Scene::Scene(Window& window) :
+    window(window),
+    ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
+    camera(GhostCamera(ghost, window)),
+    mapWidth(window.getWidth()),
+    mapHeight(window.getHeight())
 {
+    setMapSize(2 * window.getWidth(), 2 * window.getHeight());
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
 
@@ -51,6 +55,12 @@ void Scene::update(float dt) {
             highlightedInteractable->setHighlight(true);
         }
     }
+}
+
+void Scene::setMapSize(float width, float heigth) {
+    mapWidth = width;
+    mapHeight = heigth;
+    camera.setBounds(0, 0, mapWidth, mapHeight);
 }
 
 std::vector<Person*> Scene::getNeighbors(Interactable& interactable, float range) {
