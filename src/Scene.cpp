@@ -1,11 +1,15 @@
 #include "Scene.hpp"
 #include "Constants.hpp"
+#include "Utils.hpp"
 #include <cstdlib>
 #define _USE_MATH_DEFINES 
 #include "math.h"
 #include <cmath>
 
-Scene::Scene(Window& window) : window(window), camera(GhostCamera(ghost)) {
+Scene::Scene(Window& window) : window(window),
+                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
+                               camera(GhostCamera(ghost))
+{
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
 
@@ -37,34 +41,28 @@ void Scene::update(float dt) {
     camera.update(dt);
 
 	// Highlight closer item to ghost below a given range
-	float range = 100;
 	if (interactables.size() > 0)
 	{
 		int minIdx = 0;
 		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
-		for (int i(0); i < interactables.size(); i++)
-		{
-			if (interactables[i]->isHighlighted())
+		for (int i(0); i < interactables.size(); i++) {
+            if (interactables[i]->isHighlighted()) {
                 interactables[i]->setHighlight(false);
+            }
 
             float dist = getEntityDistance(ghost, *interactables[i]);
-            if (dist < minDist)
-			{
+            if (dist < minDist) {
                 minDist = dist;
 				minIdx = i;
 			}
 		}
-		if (minDist <= range)
-		{
+		if (minDist <= GHOST_ACTION_RANGE) {
 			interactables[minIdx]->setHighlight(true);
-		}
+            highlightedInteractable = interactables[minIdx].get();
+        } else {
+            highlightedInteractable = nullptr;
+        }
 	}
-}
-
-// TODO: move to utils
-float Scene::getMagnitude(float x1, float y1, float x2, float y2)
-{
-	return std::sqrtf(std::powf(x1 - x2, 2) + std::powf(y1 - y2, 2));
 }
 
 float Scene::getEntityDistance(Entity e1, Entity e2)

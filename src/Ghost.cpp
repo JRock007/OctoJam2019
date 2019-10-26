@@ -91,12 +91,12 @@ void Ghost::doAction(GhostAction action) {
 }
 
 void Ghost::dash() {
-    if (ay == x && ay == 0) {
+    if (std::abs(vx) < GHOST_MIN_SPEED_FOR_DASH && std::abs(vy) < GHOST_MIN_SPEED_FOR_DASH) {
         // Don't dash if we're not moving
     } else if (dashCooldown > 0) {
         // Cooldown isn't over yet
     } else {
-        float angle = std::atan2(-ay, ax);
+        float angle = std::atan2(-vy, vx);
         dashAx = GHOST_DASH_ACCEL * std::cos(angle);
         dashAy = -GHOST_DASH_ACCEL * std::sin(angle);
         dashCooldown = GHOST_DASH_COOLDOWN;
