@@ -1,12 +1,8 @@
 #include "Entity.hpp"
 
-Entity::Entity() :
-	x(0.f),
-	y(0.f),
-	w(0.f),
-	h(0.f)
+Entity::Entity(float x = 0, float y = 0 , float w = 0, float h = 0) :
+	x(x), y(y), w(w), h(h)
 {
-
 }
 
 Entity::~Entity()

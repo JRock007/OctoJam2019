@@ -10,7 +10,7 @@ class Table:
     public Entity
 {
 public:
-    Table();
+    Table(float x, float y);
     ~Table();
 	void draw() override;
     Vector2 getNextPosition();

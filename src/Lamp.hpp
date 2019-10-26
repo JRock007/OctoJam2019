@@ -9,7 +9,7 @@ class Lamp:
     public Entity
 {
 public:
-    Lamp(Table& table);
+    Lamp(float x, float y, Table& table);
     ~Lamp();
     void interact();
     void toggle();

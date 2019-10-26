@@ -4,6 +4,7 @@
 #include "Node.hpp"
 #include "GhostAction.hpp"
 #include "Node.hpp"
+#include <memory>
 
 class Scene: public Node {
 public:
