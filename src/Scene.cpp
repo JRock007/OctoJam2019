@@ -9,8 +9,16 @@
 #include "Scene.hpp"
 #include "raylib.h"
 
+Scene::Scene() {};
+Scene::~Scene() {};
+
 void Scene::draw() {
     DrawFPS(10, 10);
+
+    // Delegate drawing to all the nodes
+    for (auto& node: nodes) {
+        node.draw();
+    }
 }
 
 Vector2 Scene::getInputAcceleration() {
