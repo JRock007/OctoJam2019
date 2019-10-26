@@ -16,5 +16,5 @@ protected:
     Vector2 getInputAcceleration();
     GhostAction getInputAction();
 
-    std::vector<Node> nodes;
+    std::vector<std::shared_ptr<Node>> nodes;
 };

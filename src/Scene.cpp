@@ -2,14 +2,20 @@
 #include "raylib.h"
 
 Scene::Scene() {};
-Scene::~Scene() {};
+
+Scene::~Scene() {
+    // Release all the pointers we have
+    for (auto node: nodes) {
+        node.reset();
+    }
+};
 
 void Scene::draw() {
     DrawFPS(10, 10);
 
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
-        node.draw();
+        node->draw();
     }
 }
 

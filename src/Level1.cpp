@@ -3,9 +3,12 @@
 
 Level1::Level1() {
     // Create some nodes for testing
-    nodes.push_back(Ghost());
-    nodes.push_back(Table());
-    nodes.push_back(Person());
+
+    std::shared_ptr<Table> table(new Table());
+    nodes.push_back(table);
+
+    std::shared_ptr<Person> person(new Person());
+    nodes.push_back(person);
 }
 
 Level1::~Level1() {
