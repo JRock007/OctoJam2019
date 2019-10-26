@@ -54,7 +54,7 @@ void Scene::update(float dt) {
 				minIdx = i;
 			}
 		}
-		if (minDist <= range)
+		if (minDist <= GHOST_ACTION_RANGE)
 		{
 			interactables[minIdx]->setHighlight(true);
 		}
