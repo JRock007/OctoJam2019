@@ -1,6 +1,6 @@
 #include "raylib.h"
 #include "Window.hpp"
-#include "Level1.hpp"
+#include "Levels.hpp"
 #include "Person.hpp"
 #include <cstdlib>
 #include <iostream>
@@ -13,10 +13,10 @@ int main(void)
 	std::srand((unsigned int)std::time(nullptr));
 
     auto window = Window();
-    window.toggleFullscreen();
-    window.setCursorEnabled(false);
+    // window.toggleFullscreen();
+    // window.setCursorEnabled(false);
     
-    auto lvl = Level1(window);
+    auto lvl = Level2(window);
 
 	TextureManager::loadTexture("tileset", "assets/Tileset_Prototype.png");
 
