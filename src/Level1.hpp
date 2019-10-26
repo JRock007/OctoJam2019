@@ -6,6 +6,6 @@ public:
     Level1();
     ~Level1();
 
-    virtual void draw();
-    virtual void update(float dt);
+    virtual void draw() override;
+    virtual void update(float dt) override;
 };

@@ -9,8 +9,8 @@
 
 class Scene: public Node {
 public:
-    virtual void draw();
-    virtual void update(float dt);
+    virtual void draw() override;
+    virtual void update(float dt) override;
 
 protected:
     Scene();
