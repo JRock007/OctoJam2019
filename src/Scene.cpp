@@ -3,14 +3,11 @@
 #include <cstdlib>
 #define _USE_MATH_DEFINES 
 #include "math.h"
-#include <iostream>
 
 Scene::Scene(Window& window) : window(window) {
-    // camera.offset = Vector2{window.getWidth() / 2, window.getHeight() / 2};
     camera.offset = Vector2{0, 0};
     camera.target = Vector2{0, 0};
 
-    // camera.rotation = 10.0f;
     camera.rotation = 0;
     camera.zoom = 0.5f;
     camera.zoom = 1;
