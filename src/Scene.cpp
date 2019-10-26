@@ -3,8 +3,18 @@
 #include <cstdlib>
 #define _USE_MATH_DEFINES 
 #include "math.h"
+#include <iostream>
 
-Scene::Scene() {};
+Scene::Scene(Window& window) : window(window) {
+    // camera.offset = Vector2{window.getWidth() / 2, window.getHeight() / 2};
+    camera.offset = Vector2{0, 0};
+    camera.target = Vector2{0, 0};
+
+    // camera.rotation = 10.0f;
+    camera.rotation = 0;
+    camera.zoom = 0.5f;
+    camera.zoom = 1;
+};
 
 Scene::~Scene() {
     // Release all the pointers we have
@@ -20,8 +30,6 @@ Scene::~Scene() {
 };
 
 void Scene::draw() {
-    DrawFPS(10, 10);
-
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
         node->draw();
@@ -39,6 +47,11 @@ void Scene::update(float dt) {
 
     // Draw the ghost last so it's on top
     ghost.update(dt);
+    camera.target = Vector2{ghost.getX(), ghost.getY()};
+}
+
+Camera2D& Scene::getCamera() {
+    return camera;
 }
 
 float Scene::getInputAngle() {

@@ -1,7 +1,7 @@
 #include "Level1.hpp"
 #include "Entities.hpp"
 
-Level1::Level1() {
+Level1::Level1(Window& window) : Scene(window) {
     // Create some nodes for testing
 	spawnLamp(800, 500);
 

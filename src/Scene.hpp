@@ -5,6 +5,7 @@
 #include "GhostAction.hpp"
 #include "Node.hpp"
 #include "Entities.hpp"
+#include "Window.hpp"
 #include <memory>
 
 class Scene: public Node {
@@ -12,9 +13,15 @@ public:
     virtual void draw() override;
     virtual void update(float dt) override;
 
+    Camera2D& getCamera();
+
 protected:
-    Scene();
+    Scene(Window&);
     ~Scene();
+
+    Window& window;
+    Camera2D camera = {0};
+
     float getInputAngle();
     float getInputAmplitude();
     GhostAction getInputAction();
