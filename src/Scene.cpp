@@ -98,7 +98,6 @@ float Scene::getInputAmplitude() {
         bool pressingUp = IsKeyDown(KEY_UP) || IsKeyDown(KEY_W);
         bool pressingDown = IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S);
         amplitude = computeAmplitude(pressingLeft, pressingRight, pressingUp, pressingDown);
-
     }
 
     return amplitude;
