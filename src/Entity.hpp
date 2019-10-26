@@ -14,7 +14,7 @@ public:
     Entity();
     ~Entity();
     // Perform render operation
-    virtual void draw();
+    virtual void draw() override;
     // Perform update and logic
     virtual void update(float dt);
 

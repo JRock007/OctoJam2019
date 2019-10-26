@@ -9,5 +9,6 @@ class Table:
 public:
     Table();
     ~Table();
+	void draw() override;
     Vector2 getNextPosition();
 };

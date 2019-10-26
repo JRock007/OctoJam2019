@@ -12,7 +12,7 @@ public:
     void leave();
     // Orders to enter the room
     void enter();
-    void draw();
+    void draw() override;
 	bool isDisabled() { return disabled; }
 protected:
 	bool disabled;
