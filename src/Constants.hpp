@@ -13,3 +13,5 @@
 
 #define CAMERA_SLOW_RATIO 0.25
 #define CAMERA_CATCHUP_RATIO 2
+
+#define SPRITE_SCALE 4
