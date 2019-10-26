@@ -7,3 +7,11 @@
 //
 
 #include "Node.hpp"
+
+void Node::draw()
+{
+}
+
+void Node::update(float dt)
+{
+}
