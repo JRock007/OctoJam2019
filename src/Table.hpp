@@ -6,6 +6,7 @@
 class Table:
     public Entity
 {
+public:
     Table();
     ~Table();
     Vector2 getNextPosition();

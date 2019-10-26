@@ -7,6 +7,7 @@
 //
 
 #pragma once
+#include "raylib.h"
 
 class Node {
 public:

@@ -1,9 +1,11 @@
 #include "Lamp.hpp"
 
-Lamp::Lamp(Table table) : Entity()
+Lamp::Lamp(Table& table) : 
+	Entity(),
+	table(table),
+	turnedOn(true)
 {
-    this->table = table
-    turnedOn = true;
+
 }
 
 Lamp::~Lamp()
@@ -16,7 +18,7 @@ void Lamp::interact()
     toggle();
 }
 
-void toggle()
+void Lamp::toggle()
 {
     turnedOn = !turnedOn;
 }
