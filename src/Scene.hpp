@@ -41,7 +41,8 @@ protected:
 	// Get distance between two entities
 	float getEntityDistance(Entity e1, Entity e2);
 
-    Ghost ghost = Ghost(1280/2, 720/2);
+    Ghost ghost;
+    Interactable* highlightedInteractable = nullptr;
     std::vector<std::shared_ptr<Node>> nodes;
 	std::vector<std::shared_ptr<Table>> tables;
 	std::vector<std::shared_ptr<Person>> persons;

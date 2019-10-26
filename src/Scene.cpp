@@ -6,7 +6,10 @@
 #include "math.h"
 #include <cmath>
 
-Scene::Scene(Window& window) : window(window), camera(GhostCamera(ghost)) {
+Scene::Scene(Window& window) : window(window),
+                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
+                               camera(GhostCamera(ghost))
+{
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
 
@@ -42,22 +45,23 @@ void Scene::update(float dt) {
 	{
 		int minIdx = 0;
 		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
-		for (int i(0); i < interactables.size(); i++)
-		{
-			if (interactables[i]->isHighlighted())
+		for (int i(0); i < interactables.size(); i++) {
+            if (interactables[i]->isHighlighted()) {
                 interactables[i]->setHighlight(false);
+            }
 
             float dist = getEntityDistance(ghost, *interactables[i]);
-            if (dist < minDist)
-			{
+            if (dist < minDist) {
                 minDist = dist;
 				minIdx = i;
 			}
 		}
-		if (minDist <= GHOST_ACTION_RANGE)
-		{
+		if (minDist <= GHOST_ACTION_RANGE) {
 			interactables[minIdx]->setHighlight(true);
-		}
+            highlightedInteractable = interactables[minIdx].get();
+        } else {
+            highlightedInteractable = nullptr;
+        }
 	}
 }
 

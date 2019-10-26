@@ -32,7 +32,14 @@ void Level1::update(float dt) {
 
     // Pass inputs to ghost
     auto action = Scene::getInputAction();
-    ghost.doAction(action);
+    if (action == GhostAction::interact) {
+        // Catch this and directly interact with the item
+        if (highlightedInteractable != nullptr) {
+            highlightedInteractable->interact();
+        }
+    } else if (action != GhostAction::none) {
+        ghost.doAction(action);
+    }
 
     auto angle = Scene::getInputAngle();
     auto amplitude = Scene::getInputAmplitude();
