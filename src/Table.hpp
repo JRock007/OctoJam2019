@@ -2,6 +2,9 @@
 
 #include "raylib.h"
 #include "Entity.hpp"
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
 
 class Table:
     public Entity

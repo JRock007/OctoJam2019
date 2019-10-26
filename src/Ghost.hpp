@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
+#include "raylib.h"
 
 class Ghost:
     public Entity
@@ -8,4 +9,5 @@ class Ghost:
 public:
     Ghost();
     ~Ghost();
+	virtual void draw();
 };

@@ -15,12 +15,18 @@ public:
     // Reposition entity by giving an offset
     void move(float dx, float dy);
 
-    // x getter
-    float getX() { return x; }
-    // y getter
-    float getY() { return y; }
+	// x getter
+	float getX() { return x; }
+	// y getter
+	float getY() { return y; }
+	// w getter
+	float getW() { return w; }
+	// h getter
+	float getH() { return h; }
 
 protected:
     float x;
     float y;
+	float w;
+	float h;
 };
