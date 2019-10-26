@@ -37,6 +37,7 @@ void Level1::update(float dt) {
     auto action = Scene::getInputAction();
     ghost.doAction(action);
 
-    auto accel = Scene::getInputAcceleration();
-    ghost.setAcceleration(accel);
+    auto angle = Scene::getInputAngle();
+    auto amplitude = Scene::getInputAmplitude();
+    ghost.setAcceleration(angle, amplitude);
 }

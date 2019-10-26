@@ -15,7 +15,8 @@ public:
 protected:
     Scene();
     ~Scene();
-    Vector2 getInputAcceleration();
+    float getInputAngle();
+    float getInputAmplitude();
     GhostAction getInputAction();
 	// Spawn table to a given location
 	void spawnTable(float x, float y);
