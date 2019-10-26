@@ -13,5 +13,4 @@ public:
     void interact() override;
 	void flip();
 	virtual void draw() override;
-protected:
 };
