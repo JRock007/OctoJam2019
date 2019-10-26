@@ -9,13 +9,12 @@ class Lamp:
     public Entity
 {
 public:
-    Lamp(float x, float y, Table& table);
+    Lamp(float x, float y);
     ~Lamp();
-    void interact();
+	virtual void interact() override;
     void toggle();
 	bool isTurnedOn() { return turnedOn; }
-
+	virtual void draw() override;
 protected:
-    Table& table;
 	bool turnedOn;
 };

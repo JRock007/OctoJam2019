@@ -1,8 +1,7 @@
 #include "Lamp.hpp"
 
-Lamp::Lamp(float x, float y, Table& table) : 
+Lamp::Lamp(float x, float y) : 
 	Entity(x, y, 10, 40),
-	table(table),
 	turnedOn(true)
 {
 
@@ -21,4 +20,9 @@ void Lamp::interact()
 void Lamp::toggle()
 {
     turnedOn = !turnedOn;
+}
+
+void Lamp::draw()
+{
+	DrawRectangle(x, y, w, h, YELLOW);
 }

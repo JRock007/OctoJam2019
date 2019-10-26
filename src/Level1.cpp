@@ -10,15 +10,19 @@ Level1::Level1() {
     nodes.push_back(person);
 	*/
 
+	spawnLamp(800, 500);
+
 	spawnTable(300, 200);
 	spawnTable(700, 300);
 	spawnTable(500, 600);
+
+	spawnBook(710, 320);
 
 	for (int i(0); i < 10; i++)
 	{
 		// Select random table
 		auto table = *tables[std::rand() % tables.size()];
-		spawnPerson(table);
+		spawnPersonAroundTable(table);
 	}
 }
 
