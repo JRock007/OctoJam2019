@@ -43,6 +43,7 @@ void Scene::update(float dt) {
     }
 
     ghost.update(dt);
+    ghost.clamp(MAP_BORDER_SIZE, MAP_BORDER_SIZE, mapWidth - MAP_BORDER_SIZE, mapHeight - MAP_BORDER_SIZE);
     camera.update(dt);
 
 	// Highlight closer item to ghost below a given range

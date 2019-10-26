@@ -34,6 +34,28 @@ float Ghost::getVy() {
     return vy;
 }
 
+void Ghost::clamp(float minX, float minY, float maxX, float maxY) {
+    if (x < minX) {
+        x = minX;
+        vx = 0;
+        ax = 0;
+    } else if (x + w > maxX) {
+        x = maxX - w;
+        vx = 0;
+        ax = 0;
+    }
+
+    if (y < minY) {
+        y = minY;
+        vy = 0;
+        ay = 0;
+    } else if (y + h > maxY) {
+        y = maxY - h;
+        vy = 0;
+        ay = 0;
+    }
+}
+
 void Ghost::setAcceleration(float angle, float amplitude) {
     ax = amplitude * std::cos(angle);
     ay = -amplitude * std::sin(angle);
