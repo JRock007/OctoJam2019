@@ -96,7 +96,7 @@ void Ghost::dash() {
     } else if (dashCooldown > 0) {
         // Cooldown isn't over yet
     } else {
-        float angle = std::atan2(-ay, ax);
+        float angle = std::atan2(-vy, vx);
         dashAx = GHOST_DASH_ACCEL * std::cos(angle);
         dashAy = -GHOST_DASH_ACCEL * std::sin(angle);
         dashCooldown = GHOST_DASH_COOLDOWN;
