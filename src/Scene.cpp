@@ -196,13 +196,32 @@ void Scene::spawnTable(float x, float y)
 	nodes.push_back(std::make_shared<Table>(table));
 }
 
-void Scene::spawnPerson(Table& table)
+void Scene::spawnPerson(float x, float y)
 {
-	// Spawn a person
-	Vector2 nextPosition = table.getNextPosition();
-	Person person(nextPosition.x, nextPosition.y);
+	Person person(x, y);
 	person.enter(); // Toggle visibility on
 
 	persons.push_back(std::make_shared<Person>(person));
 	nodes.push_back(std::make_shared<Person>(person));
+}
+
+void Scene::spawnPersonAroundTable(Table& table)
+{
+	// Spawn a person
+	Vector2 nextPosition = table.getNextPosition();
+	spawnPerson(nextPosition.x, nextPosition.y);
+}
+
+void Scene::spawnLamp(float x, float y)
+{
+	Lamp lamp(x, y);
+	interactables.push_back(std::make_shared<Interactable>(lamp));
+	nodes.push_back(std::make_shared<Lamp>(lamp));
+}
+
+void Scene::spawnBook(float x, float y)
+{
+	Book book(x, y);
+	interactables.push_back(std::make_shared<Interactable>(book));
+	nodes.push_back(std::make_shared<Book>(book));
 }

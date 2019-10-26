@@ -1,8 +1,7 @@
 #include "Book.hpp"
 
-Book::Book(float x, float y, Table& table) : 
-	Entity(x, y, 20, 20),
-	table(table)
+Book::Book(float x, float y) : 
+	Entity(x, y, 20, 20)
 {
 }
 
@@ -17,11 +16,6 @@ void Book::interact()
 }
 
 void Book::flip()
-{
-
-}
-
-void Book::drop()
 {
 
 }

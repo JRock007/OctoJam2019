@@ -21,13 +21,20 @@ protected:
 
 	// Spawn table to a given location
 	void spawnTable(float x, float y);
+	// Spawn person to a given location
+	void spawnPerson(float x, float y);
 	// Spawn person to a random table
-	void spawnPerson(Table& table);
+	void spawnPersonAroundTable(Table& table);
+	// Spawn a lamp to a given location
+	void spawnLamp(float x, float y);
+	// Spawn a book to a given location
+	void spawnBook(float x, float y);
 
     Ghost ghost = Ghost(1280/2, 720/2);
     std::vector<std::shared_ptr<Node>> nodes;
 	std::vector<std::shared_ptr<Table>> tables;
 	std::vector<std::shared_ptr<Person>> persons;
+	std::vector<std::shared_ptr<Interactable>> interactables;
 
 private:
     float computeAngle(bool left, bool right, bool up, bool down);
