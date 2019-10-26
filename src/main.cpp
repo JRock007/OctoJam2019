@@ -30,7 +30,8 @@ int main(void)
 
     // Main game loop
     while (!WindowShouldClose()) {
-        ClearBackground(RAYWHITE);
+		ClearBackground(Color{ 106, 101, 118 });	
+		//ClearBackground(RAYWHITE);
 
         // Update
         lvl.update(GetFrameTime());

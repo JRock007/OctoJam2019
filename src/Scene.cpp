@@ -9,7 +9,7 @@
 #include "TextureManager.hpp"
 
 Scene::Scene(Window& window) : window(window),
-                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
+                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset"))),
                                camera(GhostCamera(ghost))
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
@@ -272,7 +272,7 @@ void Scene::spawnTable(float x, float y)
 
 void Scene::spawnPerson(float x, float y)
 {
-	Person person(x, y);
+	Person person(x, y, TextureManager::getTexture("tileset"));
 	person.enter(); // Toggle visibility on
 
 	persons.push_back(std::make_shared<Person>(person));

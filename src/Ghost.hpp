@@ -9,7 +9,7 @@ class Ghost:
     public Entity
 {
 public:
-    Ghost(float x, float y);
+    Ghost(float x, float y, Texture2D& tileset);
     ~Ghost();
 
 	virtual void draw();
@@ -30,6 +30,9 @@ private:
     float vy = 0;
 
     float dashCooldown = 0;
+
+	Texture2D& tileset;
+	Rectangle src;
 
     void updateAcceleration(float dt);
     void updateSpeed(float);

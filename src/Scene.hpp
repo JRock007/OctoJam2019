@@ -13,14 +13,14 @@
 
 class Scene: public Node {
 public:
+    Scene(Window&);
+    ~Scene();
     virtual void draw() override;
     virtual void update(float dt) override;
 
     Camera2D& getCamera();
 
 protected:
-    Scene(Window&);
-    ~Scene();
 
     Window& window;
     GhostCamera camera;
