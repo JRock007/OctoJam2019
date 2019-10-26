@@ -17,6 +17,19 @@ void Scene::draw() {
     for (auto& node: nodes) {
         node->draw();
     }
+
+    // Draw the ghost last so it's on top
+    ghost.draw();
+}
+
+void Scene::update(float dt) {
+    // Delegate updating to all the nodes
+    for (auto& node: nodes) {
+        node->update(dt);
+    }
+
+    // Draw the ghost last so it's on top
+    ghost.update(dt);
 }
 
 Vector2 Scene::getInputAcceleration() {

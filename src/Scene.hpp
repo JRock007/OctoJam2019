@@ -4,11 +4,12 @@
 #include "Node.hpp"
 #include "GhostAction.hpp"
 #include "Node.hpp"
+#include "Entities.hpp"
 
 class Scene: public Node {
 public:
-    void draw();
-    virtual void update(float dt) = 0;
+    virtual void draw();
+    virtual void update(float dt);
 
 protected:
     Scene();
@@ -16,5 +17,6 @@ protected:
     Vector2 getInputAcceleration();
     GhostAction getInputAction();
 
+    Ghost ghost = Ghost();
     std::vector<std::shared_ptr<Node>> nodes;
 };
