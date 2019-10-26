@@ -3,13 +3,6 @@
 
 Level1::Level1() {
     // Create some nodes for testing
-    /*std::shared_ptr<Table> table(new Table(300, 200));
-    nodes.push_back(table);
-
-    std::shared_ptr<Person> person(new Person(50, 70));
-    nodes.push_back(person);
-	*/
-
 	spawnLamp(800, 500);
 
 	spawnTable(300, 200);

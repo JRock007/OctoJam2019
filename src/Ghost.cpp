@@ -22,10 +22,9 @@ void Ghost::update(float dt)
     updateSpeed(dt);
     updateCooldown(dt);
 
-    float dX = vx * dt;
-    float dY = vy * dt;
-    x += dX;
-    y += dY;
+    float dx = vx * dt;
+    float dy = vy * dt;
+    move(dx, dy);
 }
 
 void Ghost::updateSpeed(float dt) {
