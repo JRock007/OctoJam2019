@@ -1,7 +1,7 @@
 #include "Book.hpp"
 
 Book::Book(float x, float y) : 
-	Entity(x, y, 20, 20)
+	Interactable(x, y, 20, 20)
 {
 }
 
@@ -22,5 +22,8 @@ void Book::flip()
 
 void Book::draw()
 {
+	if (isHighlighted())
+		DrawRectangle(x - 3, y - 3, w + 6, h + 6, GREEN);
+
 	DrawRectangle(x, y, w, h, DARKGREEN);
 }

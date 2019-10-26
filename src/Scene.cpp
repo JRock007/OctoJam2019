@@ -3,6 +3,7 @@
 #include <cstdlib>
 #define _USE_MATH_DEFINES 
 #include "math.h"
+#include <cmath>
 
 Scene::Scene() {};
 
@@ -37,8 +38,43 @@ void Scene::update(float dt) {
         node->update(dt);
     }
 
-    // Draw the ghost last so it's on top
     ghost.update(dt);
+
+	// Highlight closer item to ghost below a given range
+	float range = 300;
+	if (interactables.size() > 0)
+	{
+		int minIdx = 0;
+		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
+		for (int i(0); i<interactables.size(); i++)
+		{
+			// interactables[i]->setHighlight(false);
+			if (getEntityDistance(ghost, *interactables[i]) < minDist)
+			{
+				minIdx = i;
+			}
+		}
+		if (minDist <= range)
+		{
+			interactables[minIdx]->setHighlight(true);
+			//std::cout << closest.isHighlighted() << std::endl;
+		}
+	}
+}
+
+// TODO: move to utils
+float Scene::getMagnitude(float x1, float y1, float x2, float y2)
+{
+	return std::sqrtf(std::powf(x1 - x2, 2) + std::powf(y1 - y2, 2));
+}
+
+float Scene::getEntityDistance(Entity e1, Entity e2)
+{
+	return getMagnitude(
+		e1.getX() + e1.getW() / 2,
+		e1.getY() + e1.getH() / 2,
+		e2.getX() + e2.getW() / 2,
+		e2.getY() + e2.getH() / 2);
 }
 
 float Scene::getInputAngle() {

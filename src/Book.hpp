@@ -5,8 +5,7 @@
 #include "Table.hpp"
 
 class Book:
-    public Interactable,
-    public Entity
+    public Interactable
 {
 public:
     Book(float x, float y);

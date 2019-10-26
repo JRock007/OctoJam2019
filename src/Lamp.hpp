@@ -5,8 +5,7 @@
 #include "Table.hpp"
 
 class Lamp:
-    public Interactable,
-    public Entity
+    public Interactable
 {
 public:
     Lamp(float x, float y);
