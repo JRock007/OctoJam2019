@@ -1,0 +1,6 @@
+#pragma once
+
+#define GHOST_ACCEL 2500
+#define GHOST_DASH_ACCEL 5000
+#define GHOST_FRICTION 0.8
+#define GHOST_MAX_SPEED 10000

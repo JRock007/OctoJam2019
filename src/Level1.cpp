@@ -14,12 +14,17 @@ Level1::~Level1() {
     
 }
 
-
 void Level1::draw() {
     Scene::draw();
 }
 
 void Level1::update(float dt) {
-    Scene::getInputAcceleration();
-    Scene::getInputAction();
+    Scene::update(dt);
+
+    // Pass inputs to ghost
+    auto action = Scene::getInputAction();
+    ghost.doAction(action);
+
+    auto accel = Scene::getInputAcceleration();
+    ghost.setAcceleration(accel);
 }

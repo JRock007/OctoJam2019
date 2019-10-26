@@ -1,5 +1,5 @@
 #include "Scene.hpp"
-#include "raylib.h"
+#include "Constants.hpp"
 
 Scene::Scene() {};
 
@@ -37,24 +37,24 @@ Vector2 Scene::getInputAcceleration() {
      Get which direction the user is trying to go to
      Key names use qwerty input, but adapt to other keyboards
      */
-    float xSpeed = 0;
-    float ySpeed = 0;
+    float xAccel = 0;
+    float yAccel = 0;
 
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        xSpeed += 10;
+        xAccel += GHOST_ACCEL;
     }
     if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-        xSpeed -= 10;
+        xAccel -= GHOST_ACCEL;
     }
 
     if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
-        ySpeed += 10;
+        yAccel -= GHOST_ACCEL;
     }
     if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
-        ySpeed -= 10;
+        yAccel += GHOST_ACCEL;
     }
 
-    return Vector2{xSpeed, ySpeed};
+    return Vector2{xAccel, yAccel};
 }
 
 GhostAction Scene::getInputAction() {
