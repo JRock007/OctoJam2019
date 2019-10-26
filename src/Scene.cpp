@@ -42,7 +42,7 @@ void Scene::update(float dt) {
     camera.target = Vector2{ghost.getX(), ghost.getY()};
 
 	// Highlight closer item to ghost below a given range
-	float range = 300;
+	float range = 100;
 	if (interactables.size() > 0)
 	{
 		int minIdx = 0;
