@@ -1,5 +1,6 @@
 #include "Scene.hpp"
 #include "Constants.hpp"
+#include "Utils.hpp"
 #include <cstdlib>
 #define _USE_MATH_DEFINES 
 #include "math.h"
@@ -59,12 +60,6 @@ void Scene::update(float dt) {
 			interactables[minIdx]->setHighlight(true);
 		}
 	}
-}
-
-// TODO: move to utils
-float Scene::getMagnitude(float x1, float y1, float x2, float y2)
-{
-	return std::sqrtf(std::powf(x1 - x2, 2) + std::powf(y1 - y2, 2));
 }
 
 float Scene::getEntityDistance(Entity e1, Entity e2)

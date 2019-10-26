@@ -38,8 +38,6 @@ protected:
 	// Spawn a book to a given location
 	void spawnBook(float x, float y);
 
-	// Get distance between two coordinates
-	float getMagnitude(float x1, float y1, float x2, float y2);
 	// Get distance between two entities
 	float getEntityDistance(Entity e1, Entity e2);
 
