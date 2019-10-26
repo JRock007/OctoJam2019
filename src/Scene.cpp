@@ -48,8 +48,10 @@ void Scene::update(float dt) {
 		float minDist = getEntityDistance(ghost, *interactables[minIdx]);
 		for (int i(0); i<interactables.size(); i++)
 		{
-			// interactables[i]->setHighlight(false);
-			if (getEntityDistance(ghost, *interactables[i]) < minDist)
+			if (interactables[i]->isHighlighted())
+				interactables[i]->setHighlight(false);
+
+				if (getEntityDistance(ghost, *interactables[i]) < minDist)
 			{
 				minIdx = i;
 			}

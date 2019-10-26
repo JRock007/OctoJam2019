@@ -8,10 +8,7 @@ class Interactable:
 public:
 	Interactable(float x, float y, float w, float h);
 	~Interactable();
-	virtual void setHighlight(bool state) { 
-		std::cout << "SET HIGHLIGHT: " << state << std::endl;
-		highlight = state; 
-	}
+	void setHighlight(bool state) { highlight = state; }
 	virtual void interact() {}
 	virtual void draw() override {}
 	virtual void update(float dt) override {}

@@ -24,7 +24,7 @@ void Lamp::toggle()
 
 void Lamp::draw()
 {
-	std::cout << isHighlighted() << std::endl;
+	std::cout << "Lamp is:" << isHighlighted() << std::endl;
 
 	if (isHighlighted())
 		DrawRectangle(x - 3, y - 3, w + 6, h + 6, ORANGE);
