@@ -10,8 +10,8 @@
 
 Scene::Scene(Window& window) :
     window(window),
-    ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
-    camera(GhostCamera(ghost, window)),
+    ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset")),
+    camera(ghost, window),
     mapWidth(window.getWidth()),
     mapHeight(window.getHeight())
 {
