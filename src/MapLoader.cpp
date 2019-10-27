@@ -55,7 +55,7 @@ void MapLoader::drawTiles(int tiles[], Scene& scene, int width, int height) {
 
             default:
                 // Draw
-				Rectangle dst{ x, y, w, h };
+                Rectangle dst{ static_cast<float>(x), static_cast<float>(y), static_cast<float>(w), static_cast<float>(h) };
 				DrawTexturePro(tilesetTexture, tilesetSpritesheet.getSrcRect(id), dst, {}, 0, WHITE);
                 break;
         }
