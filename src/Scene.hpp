@@ -51,6 +51,8 @@ protected:
     float getInputAmplitude();
     GhostAction getInputAction();
 
+    float remainingSurvivalTime = 60; // Random default value
+
     // Find neighbors of an interactable node
     std::vector<Person*> getNeighbors(Interactable&, float range=EVENT_ACTION_RANGE);
     // Get closest interactable object to entity

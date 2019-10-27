@@ -44,12 +44,21 @@ void Scene::drawNodes() {
 void Scene::drawGhost() {
     ghost.draw();
 
+    // Compute score
+    float score = 0;
+    for (auto& person: persons) {
+        score += !person->isDisabled();
+    }
+    score /= persons.size();
+
     BeginBlendMode(BLEND_MULTIPLIED);
+        float scale = 3 + 5 * score;
+
         // Darken the screen a bit
-        DrawRectangle(0, 0, mapWidth, mapHeight, Color{0, 0, 0, 45});
+        unsigned char alpha = int(200 * (1 - score));
+        DrawRectangle(0, 0, mapWidth, mapHeight, Color{0, 0, 0, alpha});
 
         // Show the mask
-        float scale = 5.0f;
         float x = ghost.getDrawX() - scale * maskTexture.width / 2 + ghost.getW() / 2;
         float y = ghost.getDrawY() - scale * maskTexture.height / 2 + ghost.getH() / 2;
 
@@ -113,6 +122,13 @@ void Scene::update(float dt) {
     auto angle = Scene::getInputAngle();
     auto amplitude = Scene::getInputAmplitude();
     ghost.setAcceleration(angle, amplitude);
+
+    // Update remaining time
+    if (remainingSurvivalTime > 0) {
+        remainingSurvivalTime -= dt;
+    } else {
+        std::cout << "Congrats!" << std::endl;
+    }
 }
 
 void Scene::setMapSize(float width, float heigth) {
