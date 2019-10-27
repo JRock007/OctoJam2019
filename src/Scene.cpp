@@ -89,8 +89,7 @@ void Scene::update(float dt) {
 void Scene::setMapSize(float width, float heigth) {
     mapWidth = width;
     mapHeight = heigth;
-    // camera.setBounds(-MAP_BORDER_SIZE, -MAP_BORDER_SIZE, mapWidth + MAP_BORDER_SIZE, mapHeight + MAP_BORDER_SIZE);
-    camera.setBounds(0, 0, mapWidth, mapHeight);
+    camera.setBounds(-MAP_BORDER_SIZE, -MAP_BORDER_SIZE, mapWidth + MAP_BORDER_SIZE, mapHeight + MAP_BORDER_SIZE);
 }
 
 std::vector<Person*> Scene::getNeighbors(Interactable& interactable, float range) {
