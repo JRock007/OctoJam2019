@@ -1,27 +1,28 @@
 #include "MapLoader.hpp"
 #include "Constants.hpp"
+#include <iostream>
 
-void MapLoader::loadEntities(int map[], Scene& scene, int width, int height) {
-    scene.setMapSize(width * TILE_SIZE, height * TILE_SIZE);
+void MapLoader::spawnEntities(int map[], Scene& scene, int width, int height) {
+    scene.setMapSize(width * SPRITES_SCALE * TILE_SIZE, height * SPRITES_SCALE * TILE_SIZE);
 
     for (int i = 0; i < width * height; i++) {
-        int y = TILE_SIZE * (i % width);
-        int x = TILE_SIZE * (i - y);
+        int x = SPRITES_SCALE * TILE_SIZE * (i % width);
+        int y = SPRITES_SCALE * TILE_SIZE * (i / width);
 
         switch (map[i]) {
-            case 28: // Chair (aka Person)
+            case 28: // Person
                 scene.spawnPerson(x, y);
                 break;
 
-            case 2: // Lamp
+            case 2: // TODO: Lamp
                 scene.spawnLamp(x, y);
                 break;
 
-            case 3: // Book
+            case 3: // TODO: Book
                 scene.spawnBook(x, y);
                 break;
                 
-            case 4: // Ghost
+            case 4: // TODO: Ghost
                 scene.moveGhostTo(x, y);
                 break;
 
@@ -31,15 +32,19 @@ void MapLoader::loadEntities(int map[], Scene& scene, int width, int height) {
     }
 }
 
-void MapLoader::loadTiles(int tiles[], Scene& scene, int width, int height) {
-    scene.setMapSize(width * TILE_SIZE, height * TILE_SIZE);
+void MapLoader::drawTiles(int tiles[], Scene& scene, int width, int height) {
+    scene.setMapSize(width * SPRITES_SCALE * TILE_SIZE, height * SPRITES_SCALE * TILE_SIZE);
 
     for (int i = 0; i < width * height; i++) {
-        int y = TILE_SIZE * (i % width);
-        int x = TILE_SIZE * (i - y);
+        int x = SPRITES_SCALE * TILE_SIZE * (i % width);
+        int y = SPRITES_SCALE * TILE_SIZE * (i / width);
 
         switch (tiles[i]) {
+            case 0:
+                break;
+
             default:
+                // Draw
                 break;
         }
     }

@@ -17,3 +17,4 @@
 #define MAP_BORDER_SIZE 20
 
 #define TILE_SIZE 16
+#define SPRITES_SCALE 4
