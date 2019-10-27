@@ -2,6 +2,8 @@
 #include "Entity.hpp"
 #include "raylib.h"
 #include "InteractionType.hpp"
+#include "AnimationManager.hpp"
+#include "Spritesheet.hpp"
 
 typedef enum {
     calm,
@@ -47,7 +49,8 @@ protected:
     PersonOrientation orientation;
 	Rectangle src;
 	Texture2D& tileset;
-
+	Spritesheet spritesheet;
+	AnimationManager animationManager;
 private:
     float fadeTimer = 0;
 };
