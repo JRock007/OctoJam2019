@@ -1,7 +1,7 @@
 #include "Table.hpp"
 
 Table::Table(float x, float y, Texture2D& texture, Rectangle src) : 
-	Entity(x, y, SPRITE_SCALE * src.width, SPRITE_SCALE * src.height),
+	Entity(x, y, SPRITES_SCALE * src.width, SPRITES_SCALE * src.height),
 	texture(texture),
 	src(src)
 {
@@ -15,7 +15,7 @@ Table::~Table()
 
 void Table::draw()
 {
-	Rectangle dst = { x, y, SPRITE_SCALE * src.width, SPRITE_SCALE * src.height };
+	Rectangle dst = { x, y, SPRITES_SCALE * src.width, SPRITES_SCALE * src.height };
 	DrawTexturePro(texture, src, dst, Vector2{}, 0.f, WHITE);
 }
 

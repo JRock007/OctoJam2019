@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 Person::Person(float x, float y, Texture2D& tileset) :
-	Entity(x, y, 16 * SPRITE_SCALE, 32 * SPRITE_SCALE),
+	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
 	tileset(tileset),
 	disabled(false)
 {

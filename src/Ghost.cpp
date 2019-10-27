@@ -3,7 +3,7 @@
 #include <iostream>
 
 Ghost::Ghost(float x, float y, Texture2D& tileset) : 
-	Entity(x, y, 16 * SPRITE_SCALE, 32 * SPRITE_SCALE),
+	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
 	tileset(tileset)
 {
 	src = Rectangle{ 10 * 16, 16, 1 * 16, 2 * 16 };
@@ -16,8 +16,10 @@ Ghost::~Ghost()
 
 void Ghost::draw()
 {
-	// DrawRectangle(x, y, w, h, LIGHTGRAY);
-	DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, WHITE);
+    // Add movement so it looks like the ghost is floating
+    float offset = GHOST_FLOAT_AMPLITUDE * (std::cos(GHOST_FLOAT_FREQUENCY * GetTime()) - 0.5);
+
+    DrawTexturePro(tileset, src, Rectangle{ x, y + offset, w, h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
 }
 
 void Ghost::update(float dt)
@@ -82,6 +84,14 @@ void Ghost::updateSpeed(float dt) {
 
     vy = std::fmin(vy, GHOST_MAX_SPEED);
     vy = std::fmax(vy, -GHOST_MAX_SPEED);
+
+    // Make sure speed is not too small, or it's ugly on screen
+    if (std::abs(vx) < 10) {
+        vx = 0;
+    }
+    if (std::abs(vy) < 10) {
+        vy = 0;
+    }
 }
 
 void Ghost::updateAcceleration(float dt) {
