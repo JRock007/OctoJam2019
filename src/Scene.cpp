@@ -51,7 +51,7 @@ void Scene::drawGhost() {
     }
     score /= persons.size();
 
-    if (score == 0 && GetTime() > 5) {
+    if (score == 0 && timeSinceStart > MIN_TIME_BEFORE_LOSS) {
         lost = true;
     }
 
@@ -82,6 +82,8 @@ void Scene::draw() {
 }
 
 void Scene::update(float dt) {
+    timeSinceStart += dt;
+
     // Delegate updating to all the nodes
     for (auto& node: nodes) {
         node->update(dt);

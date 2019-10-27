@@ -49,6 +49,7 @@ protected:
 
     bool won = false;
     bool lost = false;
+    float timeSinceStart = 0;
 
     void drawBackground();
     void drawNodes();

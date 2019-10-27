@@ -25,6 +25,10 @@ void Level1::draw() {
 void Level1::update(float dt) {
     Scene::update(dt);
 
+    if (timeSinceStart < MIN_TIME_BEFORE_BECOME_EXCITED) {
+        return;
+    }
+
     int limit = 1 / RANDOMLY_BECOME_EXCITED_PROBABILITY;
     float random = rand() % limit;
 
