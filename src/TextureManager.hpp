@@ -6,8 +6,9 @@
 class TextureManager
 {
 public:
-	static void loadTexture(std::string textureName, std::string texturePath);
-	static Texture& getTexture(std::string textureName);
+	void loadTexture(std::string textureName, std::string texturePath);
+	Texture& getTextureRef(std::string textureName);
+	Texture getTexture(std::string textureName);
 private:
-	static std::map<std::string, Texture2D> textures;
+	std::map<std::string, Texture2D> textures;
 };

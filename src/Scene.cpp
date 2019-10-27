@@ -8,12 +8,14 @@
 #include <limits>
 #include "TextureManager.hpp"
 
-Scene::Scene(Window& window) :
+Scene::Scene(Window& window, TextureManager& textureManager) :
     window(window),
-    ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset")),
+	tilesetTexture(textureManager.getTexture("tileset")),
+    ghost(window.getWidth() / 2, window.getHeight() / 2, textureManager.getTextureRef("tileset")),
     camera(ghost, window),
     mapWidth(window.getWidth()),
-    mapHeight(window.getHeight())
+    mapHeight(window.getHeight()),
+	mapLoader(textureManager.getTextureRef("tileset"))
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
@@ -28,10 +30,7 @@ Scene::~Scene() {
 
 void Scene::draw() {
     // Draw background
-    DrawRectangle(MAP_BORDER_SIZE, MAP_BORDER_SIZE,
-                  mapWidth - 2 * MAP_BORDER_SIZE,
-                  mapHeight - 2 * MAP_BORDER_SIZE,
-                  Color{106, 101, 118, 255});
+    DrawRectangle(0, 0, mapWidth, mapHeight, BACKGROUND_COLOR);
 
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
@@ -49,7 +48,7 @@ void Scene::update(float dt) {
     }
 
     ghost.update(dt);
-    ghost.clamp(MAP_BORDER_SIZE, MAP_BORDER_SIZE, mapWidth - MAP_BORDER_SIZE, mapHeight - MAP_BORDER_SIZE);
+    ghost.clamp(0, 0, mapWidth, mapHeight);
     camera.update(dt);
 
 	// Highlight closer item to ghost below a given range
@@ -90,6 +89,7 @@ void Scene::update(float dt) {
 void Scene::setMapSize(float width, float heigth) {
     mapWidth = width;
     mapHeight = heigth;
+    // camera.setBounds(-MAP_BORDER_SIZE, -MAP_BORDER_SIZE, mapWidth + MAP_BORDER_SIZE, mapHeight + MAP_BORDER_SIZE);
     camera.setBounds(0, 0, mapWidth, mapHeight);
 }
 
@@ -303,7 +303,7 @@ GhostAction Scene::getInputAction() {
 
 void Scene::spawnTable(float x, float y)
 {
-	Table table(x, y, TextureManager::getTexture("tileset"), Rectangle{ 5 * 16,3 * 16,4 * 16,4 * 16 });
+	Table table(x, y, tilesetTexture, Rectangle{ 5 * 16,3 * 16,4 * 16,4 * 16 });
 	// std::shared_ptr<Table> ptable(new Table(x, y));
 	tables.push_back(std::make_shared<Table>(table));
 	nodes.push_back(std::make_shared<Table>(table));
@@ -311,7 +311,7 @@ void Scene::spawnTable(float x, float y)
 
 void Scene::spawnPerson(float x, float y)
 {
-	Person person(x, y, TextureManager::getTexture("tileset"));
+	Person person(x, y, tilesetTexture);
 	person.enter(); // Toggle visibility on
 
 	persons.push_back(std::make_shared<Person>(person));

@@ -15,11 +15,13 @@ int main(void)
     auto window = Window();
     // window.toggleFullscreen();
     // window.setCursorEnabled(false);
-    
-    auto lvl = Level2(window);
 
-	TextureManager::loadTexture("tileset", "assets/Tileset_Prototype.png");
-	Texture2D& tileset = TextureManager::getTexture("tileset");
+	TextureManager textureManager;
+	textureManager.loadTexture("tileset", "assets/Tileset_Prototype.png");
+	// Texture2D& tileset = textureManager.getTextureRef("tileset");
+    
+    auto lvl = Level2(window, textureManager);
+
 	float scale = 4;
 	Rectangle tableSrc = { 5 * 16, 0, 4 * 16, 3 * 16 };
 	Rectangle tableDst = { 500, 300, scale * 4 * 16, scale * 3 * 16 };

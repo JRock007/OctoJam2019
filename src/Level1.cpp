@@ -2,7 +2,7 @@
 #include "Entities.hpp"
 #include "InteractionType.hpp"
 
-Level1::Level1(Window& window) : Scene(window) {
+Level1::Level1(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
     // Set map size so the camera can move
     setMapSize(1.5 * window.getWidth(), 2 * window.getHeight());
 

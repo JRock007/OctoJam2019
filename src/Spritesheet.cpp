@@ -1,5 +1,6 @@
 #include "Spritesheet.hpp"
 #include "Constants.hpp"
+#include <iostream>
 
 Spritesheet::Spritesheet(int frameW, int frameH, int imgW, int imgH):
     frameW(frameW),
@@ -13,10 +14,8 @@ Spritesheet::Spritesheet(int frameW, int frameH, int imgW, int imgH):
 
 Rectangle Spritesheet::getSrcRect(int id)
 {
-    if (id == 0) return Rectangle {};
-
     int line = (id - 1) / nbColumns;
-    int col = id % nbColumns;
+    int col = id - nbColumns * line - 1;
 
     int x = col * frameW;
     int y = line * frameH;

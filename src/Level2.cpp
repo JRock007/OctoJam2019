@@ -3,7 +3,7 @@
 #include "InteractionType.hpp"
 #include "MapLoader.hpp"
 
-Level2::Level2(Window& window) : Scene(window) {
+Level2::Level2(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
     // Set map size so the camera can move
     setMapSize(window.getWidth(), window.getHeight());
 
@@ -12,7 +12,7 @@ Level2::Level2(Window& window) : Scene(window) {
     mapWidth = 40;
     mapHeight = 25;
 
-    MapLoader::spawnEntities(entities, *this, mapWidth, mapHeight);
+    mapLoader.spawnEntities(entities, *this, mapWidth, mapHeight);
 }
 
 Level2::~Level2() {
@@ -21,7 +21,7 @@ Level2::~Level2() {
 
 void Level2::draw() {
     Scene::draw();
-    MapLoader::drawTiles(tiles, *this, mapWidth, mapHeight);
+    mapLoader.drawTiles(tiles, *this, mapWidth, mapHeight);
 }
 
 void Level2::update(float dt) {

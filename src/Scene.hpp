@@ -10,10 +10,12 @@
 #include "Constants.hpp"
 #include "InteractionType.hpp"
 #include <memory>
+#include "MapLoader.hpp"
+#include "TextureManager.hpp"
 
 class Scene: public Node {
 public:
-    Scene(Window&);
+    Scene(Window&, TextureManager&);
     ~Scene();
     virtual void draw() override;
     virtual void update(float dt) override;
@@ -60,6 +62,8 @@ protected:
 	std::vector<std::shared_ptr<Table>> tables;
 	std::vector<std::shared_ptr<Person>> persons;
 	std::vector<std::shared_ptr<Interactable>> interactables;
+	Texture2D tilesetTexture;
+	MapLoader mapLoader;
 
 private:
     float computeAngle(bool left, bool right, bool up, bool down);

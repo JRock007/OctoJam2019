@@ -1,9 +1,10 @@
 #pragma once
 #include "Scene.hpp"
+#include "TextureManager.hpp"
 
 class Level2: public Scene {
 public:
-    Level2(Window&);
+    Level2(Window&, TextureManager&);
     ~Level2();
 
     virtual void draw() override;
