@@ -56,7 +56,7 @@ void Scene::drawGhost() {
     }
 
     BeginBlendMode(BLEND_MULTIPLIED);
-        float scale = 3 + 5 * score;
+        float scale = 2 + 5 * score;
 
         // Darken the screen a bit
         unsigned char alpha = int(200 * (1 - score));
