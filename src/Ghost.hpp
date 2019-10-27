@@ -4,6 +4,8 @@
 #include "raylib.h"
 #include "GhostAction.hpp"
 #include <cmath>
+#include "AnimationManager.hpp"
+#include "Spritesheet.hpp"
 
 class Ghost:
     public Entity
@@ -36,6 +38,9 @@ private:
 
 	Texture2D& tileset;
 	Rectangle src;
+
+	Spritesheet spritesheet;
+	AnimationManager animationManager;
 
     void updateAcceleration(float dt);
     void updateSpeed(float);

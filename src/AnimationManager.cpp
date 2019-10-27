@@ -25,3 +25,12 @@ int AnimationManager::getFrame()
 {
     return animations[current].getFrame();
 }
+
+void AnimationManager::play(int idx, bool reset)
+{
+	if (current == idx && !reset)
+		return;
+
+	current = idx;
+	animations[current].reset();
+}
