@@ -21,6 +21,7 @@ int main(void)
     // Initialization
 	std::srand((unsigned int)std::time(nullptr));
 
+	// SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
     auto window = Window();
     // window.toggleFullscreen();
     // window.setCursorEnabled(false);
@@ -29,6 +30,7 @@ int main(void)
 
 	TextureManager textureManager;
 	textureManager.loadTexture("tileset", "assets/Tileset_Prototype.png");
+	textureManager.loadTexture("mask", "assets/mask.png");
 	// Texture2D& tileset = textureManager.getTextureRef("tileset");
 
     auto sceneManager = SceneManager(window, textureManager);

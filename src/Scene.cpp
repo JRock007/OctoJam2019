@@ -11,6 +11,7 @@
 Scene::Scene(Window& window, TextureManager& textureManager) :
     window(window),
 	tilesetTexture(textureManager.getTexture("tileset")),
+	maskTexture(textureManager.getTexture("mask")),
     ghost(window.getWidth() / 2, window.getHeight() / 2, textureManager.getTextureRef("tileset")),
     camera(ghost, window),
     mapWidth(window.getWidth()),
