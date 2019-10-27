@@ -3,7 +3,7 @@
 #include <iostream>
 
 Ghost::Ghost(float x, float y, Texture2D& ghostTexture) : 
-	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
+	Entity(x, y, 16, 32),
 	tileset(ghostTexture),
 	spritesheet(16, 32, tileset.width, tileset.height)
 {
@@ -28,7 +28,7 @@ void Ghost::draw()
 
 	int frameid = animationManager.getFrame();
 	Rectangle _src = spritesheet.getSrcRect(frameid);
-    DrawTexturePro(tileset, _src, Rectangle{ x, y + offset, w, h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
+    DrawTexturePro(tileset, _src, Rectangle{ x, y + offset, SPRITES_SCALE * w, SPRITES_SCALE * h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
 }
 
 void Ghost::update(float dt)

@@ -20,9 +20,9 @@ public:
 	// y getter
 	float getY() { return y; }
 	// w getter
-	float getW() { return w; }
+	float getW() { return SPRITES_SCALE * w; }
 	// h getter
-	float getH() { return h; }
+	float getH() { return SPRITES_SCALE * h; }
 
 protected:
     float x;
