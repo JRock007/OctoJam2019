@@ -20,17 +20,6 @@ Scene::Scene(Window& window, TextureManager& textureManager) :
 	textureManager(textureManager)
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
-
-    float scale = 1.01f;
-    if (mapWidth < window.getWidth()) {
-        scale = window.getWidth() / mapWidth;
-    }
-
-    if (mapHeight * scale < window.getHeight()) {
-        scale = window.getHeight() / mapHeight;
-    }
-
-    camera.camera.zoom = scale;
 };
 
 Scene::~Scene() {
@@ -158,6 +147,12 @@ void Scene::setMapSize(float width, float heigth) {
     mapWidth = width;
     mapHeight = heigth;
     camera.setBounds(-MAP_BORDER_SIZE, -MAP_BORDER_SIZE, mapWidth + MAP_BORDER_SIZE, mapHeight + MAP_BORDER_SIZE);
+
+    // Resize game so the view is always the same
+    float scaleW = window.getWidth() / GAME_WIDTH;
+    float scaleH = window.getHeight() / GAME_HEIGHT;
+
+    camera.camera.zoom = std::min(scaleW, scaleH);
 }
 
 std::vector<Person*> Scene::getNeighbors(Interactable& interactable, float range) {

@@ -67,18 +67,28 @@ void GhostCamera::updateSpeed() {
 }
 
 void GhostCamera::clamp() {
-    float offsetX = camera.offset.x / camera.zoom;
-    float offsetY = camera.offset.y / camera.zoom;
+    if (window.getWidth() >= (maxX - minX) * camera.zoom) {
+        // Map is too small compared to screen...
+        camera.target.x = (maxX - minX) / 2;
+    } else {
+        float offsetX = camera.offset.x / camera.zoom;
 
-    if (camera.target.x - offsetX < minX) {
-        camera.target.x = minX + offsetX;
-    } else if (camera.target.x + offsetX > maxX) {
-        camera.target.x = maxX - offsetX;
+        if (camera.target.x - offsetX < minX) {
+            camera.target.x = minX + offsetX;
+        } else if (camera.target.x + offsetX > maxX) {
+            camera.target.x = maxX - offsetX;
+        }
     }
+    
+    if (window.getHeight() >= (maxY - minY) * camera.zoom) {
+        camera.target.y = (maxY - minY) / 2;
+    } else {
+        float offsetY = camera.offset.y / camera.zoom;
 
-    if (camera.target.y - offsetY < minY) {
-        camera.target.y = minY + offsetY;
-    } else if (camera.target.y + offsetY > maxY) {
-        camera.target.y = maxY - offsetY;
+        if (camera.target.y - offsetY < minY) {
+            camera.target.y = minY + offsetY;
+        } else if (camera.target.y + offsetY > maxY) {
+            camera.target.y = maxY - offsetY;
+        }
     }
 }
