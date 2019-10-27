@@ -7,13 +7,13 @@ Level1::Level1(Window& window, TextureManager& textureManager) : Scene(window, t
     setMapSize(1.5 * window.getWidth(), 2 * window.getHeight());
 
     // Create some nodes for testing
-	spawnLamp(800, 500);
 
 	spawnTable(300, 200);
 	spawnTable(700, 300);
 	spawnTable(500, 600);
 
 	spawnBook(710, 320);
+	spawnLamp(800, 500);
 
 	for (int i(0); i < 10; i++)
 	{

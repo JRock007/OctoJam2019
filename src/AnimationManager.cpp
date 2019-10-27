@@ -26,6 +26,11 @@ int AnimationManager::getFrame()
     return animations[current].getFrame();
 }
 
+bool AnimationManager::isDone()
+{
+	return animations[current].isDone();
+}
+
 void AnimationManager::play(int idx, bool reset)
 {
 	if (current == idx && !reset)

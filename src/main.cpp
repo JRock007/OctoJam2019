@@ -36,6 +36,7 @@ int main(void)
 	textureManager.loadTexture("frontstudent", "assets/Front_Student_Spritesheet.png");
 	textureManager.loadTexture("sidestudent", "assets/Profile_Student_Spritesheet.png");
 	textureManager.loadTexture("mask", "assets/mask.png");
+	textureManager.loadTexture("lamp", "assets/Lamp_Spritesheet.png");
 	// Texture2D& tileset = textureManager.getTextureRef("tileset");
 
     auto sceneManager = SceneManager(window, textureManager);

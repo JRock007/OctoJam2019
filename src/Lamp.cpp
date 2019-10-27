@@ -1,10 +1,11 @@
 #include "Lamp.hpp"
 
-Lamp::Lamp(float x, float y) : 
-	Interactable(x, y, 10, 40),
-	turnedOn(true)
+Lamp::Lamp(float x, float y, Texture2D& texture) : 
+	Interactable(x, y, 16, 16),
+	turnedOn(true),
+	texture(texture),
+	spritesheet(16,16,texture.width,texture.height)
 {
-
 }
 
 Lamp::~Lamp()
@@ -24,11 +25,21 @@ void Lamp::toggle()
 
 void Lamp::draw()
 {
-	if (isHighlighted())
-		DrawRectangle(x - 3, y - 3, w + 6, h + 6, ORANGE);
-
+	Rectangle dst{x, y, w*SPRITES_SCALE, h*SPRITES_SCALE};
+	int id = 0;
 	if (isTurnedOn())
-		DrawRectangle(x, y, w, h, BLACK);
+	{
+		if (isHighlighted())
+			id = 4;
+		else
+			id = 3;
+	}
 	else
-		DrawRectangle(x, y, w, h, YELLOW);
+	{
+		if (isHighlighted())
+			id = 2;
+		else
+			id = 1;
+	}
+	DrawTexturePro(texture, spritesheet.getSrcRect(id), dst, {}, 0.f, WHITE);
 }

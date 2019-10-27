@@ -12,6 +12,7 @@ public:
     virtual void update(float dt) override;
     virtual void draw() override;
     int getFrame();
+	bool isDone();
 	void reset();
 private:
     int current;

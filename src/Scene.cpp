@@ -9,14 +9,15 @@
 #include "TextureManager.hpp"
 
 Scene::Scene(Window& window, TextureManager& textureManager) :
-    window(window),
+	window(window),
 	tilesetTexture(textureManager.getTexture("tileset")),
 	maskTexture(textureManager.getTexture("mask")),
-    ghost(window.getWidth() / 2, window.getHeight() / 2, textureManager.getTextureRef("ghost")),
-    camera(ghost, window),
-    mapWidth(window.getWidth()),
-    mapHeight(window.getHeight()),
-	mapLoader(textureManager.getTextureRef("tileset"))
+	ghost(window.getWidth() / 2, window.getHeight() / 2, textureManager.getTextureRef("ghost")),
+	camera(ghost, window),
+	mapWidth(window.getWidth()),
+	mapHeight(window.getHeight()),
+	mapLoader(textureManager.getTextureRef("tileset")),
+	textureManager(textureManager)
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
@@ -336,14 +337,14 @@ void Scene::spawnPersonAroundTable(Table& table)
 
 void Scene::spawnLamp(float x, float y)
 {
-    auto lamp = std::make_shared<Lamp>(Lamp(x, y));
+    auto lamp = std::make_shared<Lamp>(Lamp(x, y, textureManager.getTextureRef("lamp")));
     interactables.push_back(lamp);
     nodes.push_back(lamp);
 }
 
 void Scene::spawnBook(float x, float y)
 {
-    auto book = std::make_shared<Book>(Book(x, y));
+    auto book = std::make_shared<Book>(Book(x, y, textureManager.getTextureRef("book")));
     interactables.push_back(book);
     nodes.push_back(book);
 }

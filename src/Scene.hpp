@@ -69,6 +69,7 @@ protected:
 	Texture2D tilesetTexture;
 	Texture2D maskTexture;
 	MapLoader mapLoader;
+	TextureManager& textureManager;
 
 private:
     float computeAngle(bool left, bool right, bool up, bool down);
