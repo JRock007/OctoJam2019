@@ -68,9 +68,9 @@ void Person::update(float dt) {
 void Person::reactToInteraction(InteractionType type)
 {
     switch (type) {
-        case book:
-        case lampTurnOn:
-            case lampTurnOff:
+        case InteractionType::book:
+        case InteractionType::lampTurnOn:
+        case InteractionType::lampTurnOff:
             if (state == PersonState::excited) {
                 state = PersonState::calm;
             } else if (state == PersonState::calm) {

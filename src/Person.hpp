@@ -3,21 +3,21 @@
 #include "raylib.h"
 #include "InteractionType.hpp"
 
-typedef enum {
+enum class PersonState {
     calm,
     excited,
     scared,
     entering,
     leaving,
     disabled
-} PersonState;
+};
 
-typedef enum {
+enum class PersonOrientation {
     top,
     down,
     left,
     right,
-} PersonOrientation;
+};
 
 
 class Person:
