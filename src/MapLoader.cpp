@@ -10,6 +10,10 @@ void MapLoader::spawnEntities(int map[], Scene& scene, int width, int height) {
         int y = SPRITES_SCALE * TILE_SIZE * (i / width);
 
         switch (map[i]) {
+            case 25: // Ghost
+                scene.moveGhostTo(x, y);
+                break;
+
             case 28: // Person
                 scene.spawnPerson(x, y);
                 break;
@@ -20,10 +24,6 @@ void MapLoader::spawnEntities(int map[], Scene& scene, int width, int height) {
 
             case 3: // TODO: Book
                 scene.spawnBook(x, y);
-                break;
-                
-            case 4: // TODO: Ghost
-                scene.moveGhostTo(x, y);
                 break;
 
             default:
