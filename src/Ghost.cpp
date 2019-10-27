@@ -38,7 +38,7 @@ void Ghost::update(float dt)
     float dx = vx * dt;
     float dy = vy * dt;
 
-	if (dy > 0)
+	if (dy >= 0)
 		animationManager.play(0, false);
 	else
 		animationManager.play(1, false);
