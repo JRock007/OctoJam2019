@@ -57,6 +57,11 @@ int Animation::getFrame()
     return frames[current];
 }
 
+bool Animation::isDone()
+{
+	return done;
+}
+
 void Animation::reset()
 {
 	done = false;

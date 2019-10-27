@@ -13,6 +13,7 @@ public:
     virtual void update(float dt) override;
     virtual void draw() override;
     int getFrame();
+	bool isDone();
 	void play(int idx, bool reset);
 private:
     int current;
