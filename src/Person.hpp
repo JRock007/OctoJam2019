@@ -12,12 +12,19 @@ typedef enum {
     disabled
 } PersonState;
 
+typedef enum {
+    top,
+    down,
+    left,
+    right,
+} PersonOrientation;
+
 
 class Person:
     public Entity
 {
 public:
-    Person(float x, float y, Texture2D& tileset);
+    Person(float x, float y, Texture2D& tileset, PersonOrientation orientation);
     ~Person();
 
     virtual void draw() override;
@@ -32,10 +39,12 @@ public:
 
     bool isDisabled() { return disabled; }
     PersonState getState();
+    PersonOrientation getOrientation();
 
 protected:
 	bool disabled = false;
     PersonState state = PersonState::calm;
+    PersonOrientation orientation;
 	Rectangle src;
 	Texture2D& tileset;
 

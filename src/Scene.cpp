@@ -334,9 +334,9 @@ void Scene::spawnTable(float x, float y)
 	nodes.push_back(std::make_shared<Table>(table));
 }
 
-void Scene::spawnPerson(float x, float y)
+void Scene::spawnPerson(float x, float y, PersonOrientation orientation)
 {
-	Person person(x, y, tilesetTexture);
+	Person person(x, y, tilesetTexture, orientation);
 	person.enter(); // Toggle visibility on
 
     auto personPtr = std::make_shared<Person>(person);
@@ -346,9 +346,9 @@ void Scene::spawnPerson(float x, float y)
 
 void Scene::spawnPersonAroundTable(Table& table)
 {
-	// Spawn a person
-	Vector2 nextPosition = table.getNextPosition();
-	spawnPerson(nextPosition.x, nextPosition.y);
+    // Spawn a person
+    Vector2 nextPosition = table.getNextPosition();
+    spawnPerson(nextPosition.x, nextPosition.y, PersonOrientation::down);
 }
 
 void Scene::spawnLamp(float x, float y)

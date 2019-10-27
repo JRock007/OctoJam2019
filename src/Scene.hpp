@@ -26,7 +26,7 @@ public:
     // Spawn table to a given location
     void spawnTable(float x, float y);
     // Spawn person to a given location
-    void spawnPerson(float x, float y);
+    void spawnPerson(float x, float y, PersonOrientation orientation);
     // Spawn person to a random table
     void spawnPersonAroundTable(Table& table);
     // Spawn a lamp to a given location

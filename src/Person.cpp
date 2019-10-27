@@ -2,9 +2,10 @@
 #include <iostream>
 #include <cstdlib>
 
-Person::Person(float x, float y, Texture2D& tileset) :
+Person::Person(float x, float y, Texture2D& tileset, PersonOrientation orientation) :
 	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
-	tileset(tileset)
+	tileset(tileset),
+    orientation(orientation)
 {
 	int id = std::rand() % 3;
 	src = Rectangle{ (11.f + id) * 16, 16, 1 * 16, 2 * 16 };
