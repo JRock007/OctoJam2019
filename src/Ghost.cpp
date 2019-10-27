@@ -16,8 +16,10 @@ Ghost::~Ghost()
 
 void Ghost::draw()
 {
-	// DrawRectangle(x, y, w, h, LIGHTGRAY);
-	DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, WHITE);
+    // Add movement so it looks like the ghost is floating
+    float offset = GHOST_FLOAT_AMPLITUDE * (std::cos(GHOST_FLOAT_FREQUENCY * GetTime()) - 0.5);
+
+    DrawTexturePro(tileset, src, Rectangle{ x, y + offset, w, h }, {}, 0.f, WHITE);
 }
 
 void Ghost::update(float dt)
