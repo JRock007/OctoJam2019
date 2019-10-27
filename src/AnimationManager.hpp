@@ -13,6 +13,7 @@ public:
     virtual void update(float dt) override;
     virtual void draw() override;
     int getFrame();
+	void play(int idx, bool reset);
 private:
     int current;
     std::map<int, Animation> animations;

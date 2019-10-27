@@ -30,6 +30,11 @@ int main(void)
 
 	TextureManager textureManager;
 	textureManager.loadTexture("tileset", "assets/Tileset_Prototype.png");
+	textureManager.loadTexture("ghost", "assets/Ghost_Spritesheet.png");
+	textureManager.loadTexture("book", "assets/Book_Spritesheet.png");
+	textureManager.loadTexture("backstudent", "assets/Back_Student_Spritesheet.png");
+	textureManager.loadTexture("frontstudent", "assets/Front_Student_Spritesheet.png");
+	textureManager.loadTexture("sidestudent", "assets/Profile_Student_Spritesheet.png");
 	textureManager.loadTexture("mask", "assets/mask.png");
 	// Texture2D& tileset = textureManager.getTextureRef("tileset");
 

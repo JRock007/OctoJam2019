@@ -1,4 +1,5 @@
 #include "Animation.hpp"
+#include <iostream>
 
 Animation::Animation():
 	Node(),
@@ -33,7 +34,7 @@ void Animation::update(float dt)
     {
         elapsed -= period;
         current ++;
-        if (current > frames.size())
+        if (current >= frames.size())
         {
             current = 0;
             done = true;
@@ -53,5 +54,12 @@ void Animation::draw()
 
 int Animation::getFrame()
 {
-    return current;
+    return frames[current];
+}
+
+void Animation::reset()
+{
+	done = false;
+	elapsed = 0.f;
+	current = 0;
 }

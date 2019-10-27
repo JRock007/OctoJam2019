@@ -2,11 +2,16 @@
 #include "Constants.hpp"
 #include <iostream>
 
-Ghost::Ghost(float x, float y, Texture2D& tileset) : 
+Ghost::Ghost(float x, float y, Texture2D& ghostTexture) : 
 	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
-	tileset(tileset)
+	tileset(ghostTexture),
+	spritesheet(16, 32, tileset.width, tileset.height)
 {
 	src = Rectangle{ 10 * 16, 16, 1 * 16, 2 * 16 };
+
+	animationManager.addAnimation(0, { 1,2,3,4,5,6 }, 1 / 12.f, true);
+	animationManager.addAnimation(1, { 13,14,15,16,17,18} , 1 / 12.f, true);
+	animationManager.play(0, true);
 }
 
 Ghost::~Ghost()
@@ -21,7 +26,9 @@ void Ghost::draw()
     drawX = x;
     drawY = y + offset;
 
-    DrawTexturePro(tileset, src, Rectangle{ x, y + offset, w, h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
+	int frameid = animationManager.getFrame();
+	Rectangle _src = spritesheet.getSrcRect(frameid);
+    DrawTexturePro(tileset, _src, Rectangle{ x, y + offset, w, h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
 }
 
 void Ghost::update(float dt)
@@ -32,7 +39,15 @@ void Ghost::update(float dt)
 
     float dx = vx * dt;
     float dy = vy * dt;
+
+	if (dy >= 0)
+		animationManager.play(0, false);
+	else
+		animationManager.play(1, false);
+
     move(dx, dy);
+	
+	animationManager.update(dt);
 }
 
 float Ghost::getVx() {
