@@ -3,6 +3,15 @@
 #include "raylib.h"
 #include "InteractionType.hpp"
 
+typedef enum {
+    calm,
+    excited,
+    entering,
+    leaving,
+    disabled
+} PersonState;
+
+
 class Person:
     public Entity
 {
@@ -12,6 +21,7 @@ public:
 
     virtual void draw() override;
     virtual void update(float dt) override;
+    void becomeExcited();
     void reactToInteraction(InteractionType);
 
     // Orders to leave the room
@@ -20,9 +30,11 @@ public:
     void enter();
 
     bool isDisabled() { return disabled; }
+    PersonState getState();
 
 protected:
-	bool disabled;
+	bool disabled = false;
+    PersonState state = PersonState::calm;
 	Rectangle src;
 	Texture2D& tileset;
 

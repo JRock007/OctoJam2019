@@ -25,8 +25,8 @@ int main(void)
     auto lvl1 = Level1(window, textureManager);
     auto lvl2 = Level2(window, textureManager);
     
-    // sceneManager.moveToScene(&lvl1);
-    sceneManager.moveToScene(&lvl2);
+    sceneManager.moveToScene(&lvl1);
+    // sceneManager.moveToScene(&lvl2);
 
 	float scale = 4;
 	Rectangle tableSrc = { 5 * 16, 0, 4 * 16, 3 * 16 };

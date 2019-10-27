@@ -33,4 +33,13 @@ void Level1::draw() {
 
 void Level1::update(float dt) {
     Scene::update(dt);
+
+    int limit = 1 / RANDOMLY_BECOME_EXCITED_PROBABILITY;
+    float random = rand() % limit;
+
+    if (random == (limit - 1)) {
+        // Make a random person excited
+        int i = rand() % persons.size();
+        persons[i]->becomeExcited();
+    }
 }

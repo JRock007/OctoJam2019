@@ -4,8 +4,7 @@
 
 Person::Person(float x, float y, Texture2D& tileset) :
 	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
-	tileset(tileset),
-	disabled(false)
+	tileset(tileset)
 {
 	int id = std::rand() % 3;
 	src = Rectangle{ (11.f + id) * 16, 16, 1 * 16, 2 * 16 };
@@ -20,12 +19,14 @@ void Person::leave()
 {
     disabled = true;
     fadeTimer = PERSON_FADE_DURATION;
+    state = PersonState::leaving;
 }
 
 void Person::enter()
 {
     disabled = false;
     fadeTimer = PERSON_FADE_DURATION;
+    state = PersonState::entering;
 }
 
 void Person::draw()
@@ -34,27 +35,30 @@ void Person::draw()
         return;
     }
 
-    unsigned char component = 255;
+    auto drawColor = Color{255, 255, 255, 255};
 
-    if (fadeTimer > 0) {
+    if (state == PersonState::leaving) {
         float advancement = fadeTimer / PERSON_FADE_DURATION;
-
-        if (disabled) {
-            // Fade-out
-            component = advancement * 255;
-        } else {
-            // Fade-in
-            component = (1 - advancement) * 255;
-        }
+        unsigned char component = advancement * 255;
+        drawColor = Color{component, component, component, component};
+    } else if (state == PersonState::entering) {
+        float advancement = fadeTimer / PERSON_FADE_DURATION;
+        unsigned char component = (1 - advancement) * 255;
+        drawColor = Color{component, component, component, component};
+    } else if (state == PersonState::excited) {
+        drawColor = Color{255, 0, 0, 255};
     }
 
-    auto drawColor = Color{component, component, component, component};
     DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, drawColor);
 }
 
 void Person::update(float dt) {
     if (fadeTimer > 0) {
         fadeTimer -= dt;
+
+        if (fadeTimer <= 0) {
+            state = disabled ? PersonState::disabled : PersonState::calm;
+        }
     }
 }
 
@@ -62,18 +66,32 @@ void Person::reactToInteraction(InteractionType type)
 {
     switch (type) {
         case book:
-            std::cout << "A book moved next to me!" << std::endl;
-            break;
-
         case lampTurnOn:
-            std::cout << "A lamp was turned on next to me!" << std::endl;
-            break;
+            case lampTurnOff:
+            if (state == PersonState::excited) {
+                state = PersonState::calm;
+            } else if (state == PersonState::calm) {
+                // Can leave if too noisy
+                int limit = 1 / LEAVE_AFTER_INTERACTION_PROBABILITY;
+                float random = rand() % limit;
 
-        case lampTurnOff:
-            std::cout << "A lamp was turned off next to me!" << std::endl;
+                if (random == (limit - 1)) {
+                    leave();
+                }
+            }
             break;
 
         default:
             break;
+    }
+}
+
+PersonState Person::getState() {
+    return state;
+}
+
+void Person::becomeExcited() {
+    if (state == PersonState::calm) {
+        state = PersonState::excited;
     }
 }
