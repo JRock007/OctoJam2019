@@ -1,6 +1,13 @@
 #include "MapLoader.hpp"
 #include "Constants.hpp"
+#include "Scene.hpp"
 #include <iostream>
+
+MapLoader::MapLoader(Texture2D& tilesetTexture) :
+	tilesetTexture(tilesetTexture),
+	tilesetSpritesheet(16, 16, tilesetTexture.width, tilesetTexture.height)
+{
+}
 
 void MapLoader::spawnEntities(int map[], Scene& scene, int width, int height) {
     scene.setMapSize(width * SPRITES_SCALE * TILE_SIZE, height * SPRITES_SCALE * TILE_SIZE);
@@ -38,13 +45,18 @@ void MapLoader::drawTiles(int tiles[], Scene& scene, int width, int height) {
     for (int i = 0; i < width * height; i++) {
         int x = SPRITES_SCALE * TILE_SIZE * (i % width);
         int y = SPRITES_SCALE * TILE_SIZE * (i / width);
+		int w = SPRITES_SCALE * TILE_SIZE;
+		int h = SPRITES_SCALE * TILE_SIZE;
+		int id = tiles[i];
 
-        switch (tiles[i]) {
+        switch (id) {
             case 0:
                 break;
 
             default:
                 // Draw
+				Rectangle dst{ x, y, w, h };
+				DrawTexturePro(tilesetTexture, tilesetSpritesheet.getSrcRect(id), dst, {}, 0, WHITE);
                 break;
         }
     }

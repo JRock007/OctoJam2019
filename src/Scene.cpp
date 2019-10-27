@@ -8,12 +8,14 @@
 #include <limits>
 #include "TextureManager.hpp"
 
-Scene::Scene(Window& window) :
+Scene::Scene(Window& window, TextureManager& textureManager) :
     window(window),
-    ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset")),
+	tilesetTexture(textureManager.getTexture("tileset")),
+    ghost(window.getWidth() / 2, window.getHeight() / 2, textureManager.getTextureRef("tileset")),
     camera(ghost, window),
     mapWidth(window.getWidth()),
-    mapHeight(window.getHeight())
+    mapHeight(window.getHeight()),
+	mapLoader(textureManager.getTextureRef("tileset"))
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
@@ -297,7 +299,7 @@ GhostAction Scene::getInputAction() {
 
 void Scene::spawnTable(float x, float y)
 {
-	Table table(x, y, TextureManager::getTexture("tileset"), Rectangle{ 5 * 16,3 * 16,4 * 16,4 * 16 });
+	Table table(x, y, tilesetTexture, Rectangle{ 5 * 16,3 * 16,4 * 16,4 * 16 });
 	// std::shared_ptr<Table> ptable(new Table(x, y));
 	tables.push_back(std::make_shared<Table>(table));
 	nodes.push_back(std::make_shared<Table>(table));
@@ -305,7 +307,7 @@ void Scene::spawnTable(float x, float y)
 
 void Scene::spawnPerson(float x, float y)
 {
-	Person person(x, y, TextureManager::getTexture("tileset"));
+	Person person(x, y, tilesetTexture);
 	person.enter(); // Toggle visibility on
 
 	persons.push_back(std::make_shared<Person>(person));
