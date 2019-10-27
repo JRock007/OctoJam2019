@@ -102,6 +102,7 @@ $RECYCLE.BIN/
 *.lnk
 *.vcxproj.*
 Debug
+Release
 
 ### Xcode ###
 # Xcode
