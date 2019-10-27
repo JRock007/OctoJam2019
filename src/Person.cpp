@@ -63,6 +63,18 @@ void Person::update(float dt) {
             state = disabled ? PersonState::disabled : PersonState::calm;
         }
     }
+
+    if (state == PersonState::scared) {
+        int limit = 1 / BECOME_CALM_PROBABILITY;
+        float random = rand() % limit;
+
+        if (random == (limit - 1)) {
+            // Become calm
+            state = PersonState::calm;
+        }
+    }
+
+	animationManager.update(dt);
 }
 
 void Person::reactToInteraction(InteractionType type)

@@ -58,12 +58,12 @@ void Scene::drawGhost() {
     // Compute score
     float score = 0;
     for (auto& person: persons) {
-        score += !person->isDisabled();
+        score += person->getState() == PersonState::calm;
     }
     score /= persons.size();
 
     if (score == 0) {
-        std::cout << "You lost" << std::endl;
+        lost = true;
     }
 
     BeginBlendMode(BLEND_MULTIPLIED);
@@ -142,8 +142,16 @@ void Scene::update(float dt) {
     if (remainingSurvivalTime > 0) {
         remainingSurvivalTime -= dt;
     } else {
-        std::cout << "Congrats!" << std::endl;
+        won = true;
     }
+}
+
+bool Scene::didWin() {
+    return won;
+}
+
+bool Scene::didLose() {
+    return lost;
 }
 
 void Scene::setMapSize(float width, float heigth) {

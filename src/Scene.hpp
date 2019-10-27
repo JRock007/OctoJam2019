@@ -36,12 +36,18 @@ public:
     // Teleport ghost to given position
     void moveGhostTo(float x, float y);
 
+    bool didWin();
+    bool didLose();
+
 protected:
     Window& window;
     GhostCamera camera;
 
     float mapWidth;
     float mapHeight;
+
+    bool won = false;
+    bool lost = false;
 
     void drawBackground();
     void drawNodes();

@@ -51,6 +51,10 @@ void SceneManager::update(float dt) {
         // Remove the old scene
         scenes.erase(scenes.begin());
     }
+
+    if (scenes.back()->didWin()) {
+        
+    }
 }
 
 void SceneManager::pause() {
