@@ -321,8 +321,9 @@ void Scene::spawnPerson(float x, float y)
 	Person person(x, y, tilesetTexture);
 	person.enter(); // Toggle visibility on
 
-	persons.push_back(std::make_shared<Person>(person));
-	nodes.push_back(std::make_shared<Person>(person));
+    auto personPtr = std::make_shared<Person>(person);
+    persons.push_back(personPtr);
+    nodes.push_back(personPtr);
 }
 
 void Scene::spawnPersonAroundTable(Table& table)
