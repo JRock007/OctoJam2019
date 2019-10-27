@@ -2,6 +2,10 @@
 #include "Constants.hpp"
 #include <iostream>
 
+Spritesheet::Spritesheet()
+{
+}
+
 Spritesheet::Spritesheet(int frameW, int frameH, int imgW, int imgH):
     frameW(frameW),
     frameH(frameH),

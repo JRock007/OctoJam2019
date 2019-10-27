@@ -12,6 +12,7 @@
 #include <memory>
 #include "MapLoader.hpp"
 #include "TextureManager.hpp"
+#include "Person.hpp"
 
 class Scene: public Node {
 public:

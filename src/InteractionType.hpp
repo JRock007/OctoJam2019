@@ -1,8 +1,8 @@
 #pragma once
 
-typedef enum {
+enum class InteractionType {
     unknown,
     book,
     lampTurnOn,
     lampTurnOff,
-} InteractionType;
+};

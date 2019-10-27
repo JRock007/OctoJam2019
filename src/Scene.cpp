@@ -378,8 +378,17 @@ void Scene::spawnTable(float x, float y)
 
 void Scene::spawnPerson(float x, float y, PersonOrientation orientation)
 {
-	Person person(x, y, tilesetTexture, orientation);
+	Texture2D& personTexture = textureManager.getTextureRef("frontstudent");
+
+	switch (orientation)
+	{
+	default:
+		break;
+	}
+
+	Person person(x, y, personTexture, orientation);
 	person.enter(); // Toggle visibility on
+
 
     auto personPtr = std::make_shared<Person>(person);
     persons.push_back(personPtr);

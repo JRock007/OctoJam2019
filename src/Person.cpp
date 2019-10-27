@@ -3,10 +3,22 @@
 #include <cstdlib>
 
 Person::Person(float x, float y, Texture2D& tileset, PersonOrientation orientation) :
-	Entity(x, y, 16 * SPRITES_SCALE, 32 * SPRITES_SCALE),
+	Entity(x, y, 16 * SPRITES_SCALE, 16 * SPRITES_SCALE),
 	tileset(tileset),
     orientation(orientation)
 {
+	switch (orientation)
+	{
+	default:
+		spritesheet = Spritesheet(16, 16, tileset.width, tileset.height);
+		break;
+	}
+
+	animationManager.addAnimation(0, { 1 }, 1.f, false);
+	animationManager.addAnimation(1, { 5,6,7 }, 1/8.f, true);
+	animationManager.addAnimation(2, { 9,10,11 }, 1/8.f, true);
+	animationManager.play(0, true);
+
 	int id = std::rand() % 3;
 	src = Rectangle{ (11.f + id) * 16, 16, 1 * 16, 2 * 16 };
 }
@@ -52,7 +64,10 @@ void Person::draw()
         drawColor = Color{0, 0, 255, 255};
     }
 
-    DrawTexturePro(tileset, src, Rectangle{ x, y, w, h }, {}, 0.f, drawColor);
+	Rectangle dst{ x, y, w, h };
+	int id = animationManager.getFrame();
+
+    DrawTexturePro(tileset, spritesheet.getSrcRect(id), dst, {}, 0.f, WHITE);
 }
 
 void Person::update(float dt) {
@@ -80,11 +95,12 @@ void Person::update(float dt) {
 void Person::reactToInteraction(InteractionType type)
 {
     switch (type) {
-        case book:
-        case lampTurnOn:
-            case lampTurnOff:
+        case InteractionType::book:
+        case InteractionType::lampTurnOn:
+        case InteractionType::lampTurnOff:
             if (state == PersonState::excited) {
                 state = PersonState::calm;
+				animationManager.play(0, false);
             } else if (state == PersonState::calm) {
                 // Can become scared
                 int limit = 1 / BECOME_SCARED_AFTER_INTERACTION_PROBABILITY;
@@ -92,6 +108,7 @@ void Person::reactToInteraction(InteractionType type)
 
                 if (random == (limit - 1)) {
                     state = PersonState::scared;
+					animationManager.play(2, true);
                 }
             } else if (state == PersonState::scared) {
                 // Can leave if too scared
@@ -116,5 +133,6 @@ PersonState Person::getState() {
 void Person::becomeExcited() {
     if (state == PersonState::calm) {
         state = PersonState::excited;
+		animationManager.play(1, false);
     }
 }

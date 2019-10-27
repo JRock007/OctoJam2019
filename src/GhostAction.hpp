@@ -1,9 +1,9 @@
 #pragma once
 
-typedef enum {
+enum class GhostAction {
     none,
     interact,
     shush,
     dash,
     fusrodah,
-} GhostAction;
+};
