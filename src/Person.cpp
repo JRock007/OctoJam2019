@@ -19,19 +19,43 @@ Person::~Person()
 void Person::leave()
 {
     disabled = true;
+    fadeTimer = PERSON_FADE_DURATION;
 }
 
 void Person::enter()
 {
     disabled = false;
+    fadeTimer = PERSON_FADE_DURATION;
 }
 
 void Person::draw()
 {
-	if (disabled) return;
+    if (disabled && fadeTimer <= 0) {
+        return;
+    }
 
-    //DrawRectangle(x, y, w, h, BLUE);
-	DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, WHITE);
+    unsigned char component = 255;
+
+    if (fadeTimer > 0) {
+        float advancement = fadeTimer / PERSON_FADE_DURATION;
+
+        if (disabled) {
+            // Fade-out
+            component = advancement * 255;
+        } else {
+            // Fade-in
+            component = (1 - advancement) * 255;
+        }
+    }
+
+    auto drawColor = Color{component, component, component, component};
+    DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, drawColor);
+}
+
+void Person::update(float dt) {
+    if (fadeTimer > 0) {
+        fadeTimer -= dt;
+    }
 }
 
 void Person::reactToInteraction(InteractionType type)

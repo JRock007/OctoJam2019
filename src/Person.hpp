@@ -11,6 +11,7 @@ public:
     ~Person();
 
     virtual void draw() override;
+    virtual void update(float dt) override;
     void reactToInteraction(InteractionType);
 
     // Orders to leave the room
@@ -24,4 +25,7 @@ protected:
 	bool disabled;
 	Rectangle src;
 	Texture2D& tileset;
+
+private:
+    float fadeTimer = 0;
 };
