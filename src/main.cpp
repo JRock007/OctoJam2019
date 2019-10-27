@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "TextureManager.hpp"
+#include "SceneManager.hpp"
 #include <ctime>
 
 int main(void)
@@ -19,8 +20,13 @@ int main(void)
 	TextureManager textureManager;
 	textureManager.loadTexture("tileset", "assets/Tileset_Prototype.png");
 	// Texture2D& tileset = textureManager.getTextureRef("tileset");
+
+    auto sceneManager = SceneManager(window, textureManager);
+    auto lvl1 = Level1(window, textureManager);
+    auto lvl2 = Level2(window, textureManager);
     
-    auto lvl = Level2(window, textureManager);
+    // sceneManager.moveToScene(&lvl1);
+    sceneManager.moveToScene(&lvl2);
 
 	float scale = 4;
 	Rectangle tableSrc = { 5 * 16, 0, 4 * 16, 3 * 16 };
@@ -33,22 +39,18 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose()) {
 		ClearBackground(BLACK);
-		//ClearBackground(RAYWHITE);
 
         // Update
-        lvl.update(GetFrameTime());
+        sceneManager.update(GetFrameTime());
 
         // Draw
         BeginDrawing();
-            // Draw nodes
-            BeginMode2D(lvl.getCamera());
-            lvl.draw();
+            // Draw scenes
+            BeginMode2D(sceneManager.getCamera());
+                sceneManager.draw();
             EndMode2D();
 
-			//DrawTexturePro(tileset, ghostSrc, ghostDst, Vector2{}, 0.f, WHITE);
-
-            // Draw HUD
-            DrawFPS(10, 10);
+            sceneManager.drawHud();
         EndDrawing();
     }
 
