@@ -30,7 +30,7 @@ int main(void)
 
     // Main game loop
     while (!WindowShouldClose()) {
-		ClearBackground(Color{ 106, 101, 118 });	
+		ClearBackground(BLACK);
 		//ClearBackground(RAYWHITE);
 
         // Update

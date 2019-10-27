@@ -27,6 +27,12 @@ Scene::~Scene() {
 };
 
 void Scene::draw() {
+    // Draw background
+    DrawRectangle(MAP_BORDER_SIZE, MAP_BORDER_SIZE,
+                  mapWidth - 2 * MAP_BORDER_SIZE,
+                  mapHeight - 2 * MAP_BORDER_SIZE,
+                  Color{106, 101, 118, 255});
+
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
         node->draw();
