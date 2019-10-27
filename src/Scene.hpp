@@ -19,26 +19,31 @@ public:
     virtual void update(float dt) override;
 
     Camera2D& getCamera();
+    void setMapSize(float width, float heigth);
+
+    // Spawn table to a given location
+    void spawnTable(float x, float y);
+    // Spawn person to a given location
+    void spawnPerson(float x, float y);
+    // Spawn person to a random table
+    void spawnPersonAroundTable(Table& table);
+    // Spawn a lamp to a given location
+    void spawnLamp(float x, float y);
+    // Spawn a book to a given location
+    void spawnBook(float x, float y);
+    // Teleport ghost to given position
+    void moveGhostTo(float x, float y);
 
 protected:
 
     Window& window;
     GhostCamera camera;
+    float mapWidth;
+    float mapHeight;
 
     float getInputAngle();
     float getInputAmplitude();
     GhostAction getInputAction();
-
-	// Spawn table to a given location
-	void spawnTable(float x, float y);
-	// Spawn person to a given location
-	void spawnPerson(float x, float y);
-	// Spawn person to a random table
-	void spawnPersonAroundTable(Table& table);
-	// Spawn a lamp to a given location
-	void spawnLamp(float x, float y);
-	// Spawn a book to a given location
-	void spawnBook(float x, float y);
 
     // Find neighbors of an interactable node
     std::vector<Person*> getNeighbors(Interactable&, float range=EVENT_ACTION_RANGE);

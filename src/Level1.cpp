@@ -3,6 +3,9 @@
 #include "InteractionType.hpp"
 
 Level1::Level1(Window& window) : Scene(window) {
+    // Set map size so the camera can move
+    setMapSize(1.5 * window.getWidth(), 2 * window.getHeight());
+
     // Create some nodes for testing
 	spawnLamp(800, 500);
 
@@ -30,26 +33,4 @@ void Level1::draw() {
 
 void Level1::update(float dt) {
     Scene::update(dt);
-
-    // Pass inputs to ghost
-    auto action = Scene::getInputAction();
-    if (action == GhostAction::interact) {
-        // Catch this and directly interact with the item
-        InteractionType type = getInteractionType(highlightedInteractable);
-
-        if (highlightedInteractable != nullptr && type != InteractionType::unknown) {
-            highlightedInteractable->interact();
-
-            auto neighbors = getNeighbors(*highlightedInteractable);
-            for (int i = 0; i < neighbors.size(); i++) {
-                neighbors[i]->reactToInteraction(type);
-            }
-        }
-    } else if (action != GhostAction::none) {
-        ghost.doAction(action);
-    }
-
-    auto angle = Scene::getInputAngle();
-    auto amplitude = Scene::getInputAmplitude();
-    ghost.setAcceleration(angle, amplitude);
 }

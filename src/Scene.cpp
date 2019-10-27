@@ -8,9 +8,12 @@
 #include <limits>
 #include "TextureManager.hpp"
 
-Scene::Scene(Window& window) : window(window),
-                               ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset"))),
-                               camera(GhostCamera(ghost))
+Scene::Scene(Window& window) :
+    window(window),
+    ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
+    camera(GhostCamera(ghost, window)),
+    mapWidth(window.getWidth()),
+    mapHeight(window.getHeight())
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
 };
@@ -40,6 +43,7 @@ void Scene::update(float dt) {
     }
 
     ghost.update(dt);
+    ghost.clamp(MAP_BORDER_SIZE, MAP_BORDER_SIZE, mapWidth - MAP_BORDER_SIZE, mapHeight - MAP_BORDER_SIZE);
     camera.update(dt);
 
 	// Highlight closer item to ghost below a given range
@@ -52,6 +56,35 @@ void Scene::update(float dt) {
             highlightedInteractable->setHighlight(true);
         }
     }
+
+    // Pass inputs to ghost
+    auto action = Scene::getInputAction();
+    if (action == GhostAction::interact) {
+        // Catch this and directly interact with the item
+        InteractionType type = getInteractionType(highlightedInteractable);
+
+        if (highlightedInteractable != nullptr && type != InteractionType::unknown) {
+            highlightedInteractable->interact();
+
+            auto neighbors = getNeighbors(*highlightedInteractable);
+            for (int i = 0; i < neighbors.size(); i++) {
+                neighbors[i]->reactToInteraction(type);
+            }
+        }
+    } else if (action != GhostAction::none) {
+        ghost.doAction(action);
+    }
+
+    // Make ghost move
+    auto angle = Scene::getInputAngle();
+    auto amplitude = Scene::getInputAmplitude();
+    ghost.setAcceleration(angle, amplitude);
+}
+
+void Scene::setMapSize(float width, float heigth) {
+    mapWidth = width;
+    mapHeight = heigth;
+    camera.setBounds(0, 0, mapWidth, mapHeight);
 }
 
 std::vector<Person*> Scene::getNeighbors(Interactable& interactable, float range) {
@@ -298,4 +331,9 @@ void Scene::spawnBook(float x, float y)
     auto book = std::make_shared<Book>(Book(x, y));
     interactables.push_back(book);
     nodes.push_back(book);
+}
+
+void Scene::moveGhostTo(float x, float y)
+{
+    ghost.moveTo(x, y);
 }

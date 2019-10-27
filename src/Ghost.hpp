@@ -20,6 +20,9 @@ public:
 
     float getVx();
     float getVy();
+    
+    void clamp(float minX, float minY, float maxX, float maxY);
+    void moveTo(float x, float y);
 
 private:
     float dashAx = 0;

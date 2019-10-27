@@ -10,8 +10,7 @@ class Book:
 public:
     Book(float x, float y);
     ~Book();
-    void interact();
+    void interact() override;
 	void flip();
 	virtual void draw() override;
-protected:
 };
