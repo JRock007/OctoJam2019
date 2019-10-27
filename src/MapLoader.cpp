@@ -5,7 +5,7 @@
 
 MapLoader::MapLoader(Texture2D& tilesetTexture) :
 	tilesetTexture(tilesetTexture),
-	tilesetSpritesheet(16, 16, tilesetTexture.width, tilesetTexture.height)
+	tilesetSpritesheet(TILE_SIZE, TILE_SIZE, tilesetTexture.width, tilesetTexture.height)
 {
 }
 
