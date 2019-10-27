@@ -42,6 +42,23 @@ void Scene::drawNodes() {
 
 void Scene::drawGhost() {
     ghost.draw();
+
+    BeginBlendMode(BLEND_MULTIPLIED);
+        // Darken the screen a bit
+        DrawRectangle(0, 0, mapWidth, mapHeight, Color{0, 0, 0, 45});
+
+        // Show the mask
+        float scale = 5.0f;
+        float x = ghost.getDrawX() - scale * maskTexture.width / 2 + ghost.getW() / 2;
+        float y = ghost.getDrawY() - scale * maskTexture.height / 2 + ghost.getH() / 2;
+
+        DrawTexturePro(maskTexture,
+                       Rectangle{ 0, 0, (float)maskTexture.width, (float)maskTexture.height },
+                       Rectangle{ x, y, scale * (float)maskTexture.width, scale * (float)maskTexture.height },
+                       Vector2{ 0, 0 },
+                       0,
+                       Fade(Color{255, 255, 255, 255}, 1.0f));
+    EndBlendMode();
 }
 
 void Scene::draw() {

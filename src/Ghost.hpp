@@ -24,6 +24,9 @@ public:
     void clamp(float minX, float minY, float maxX, float maxY);
     void moveTo(float x, float y);
 
+    float getDrawX();
+    float getDrawY();
+
 private:
     float dashAx = 0;
     float dashAy = 0;
@@ -31,6 +34,8 @@ private:
     float ay = 0;
     float vx = 0;
     float vy = 0;
+    float drawX = 0;
+    float drawY = 0;
 
     float dashCooldown = 0;
 

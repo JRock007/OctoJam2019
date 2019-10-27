@@ -18,6 +18,8 @@ void Ghost::draw()
 {
     // Add movement so it looks like the ghost is floating
     float offset = GHOST_FLOAT_AMPLITUDE * (std::cos(GHOST_FLOAT_FREQUENCY * GetTime()) - 0.5);
+    drawX = x;
+    drawY = y + offset;
 
     DrawTexturePro(tileset, src, Rectangle{ x, y + offset, w, h }, {}, 0.f, Color{255, 255, 255, GHOST_TRANSPARENCY});
 }
@@ -142,4 +144,12 @@ void Ghost::dash() {
         dashAy = -GHOST_DASH_ACCEL * std::sin(angle);
         dashCooldown = GHOST_DASH_COOLDOWN;
     }
+}
+
+float Ghost::getDrawX() {
+    return drawX;
+}
+
+float Ghost::getDrawY() {
+    return drawY;
 }
