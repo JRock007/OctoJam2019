@@ -42,5 +42,4 @@ void Lamp::draw()
 			id = 1;
 	}
 	DrawTexturePro(texture, spritesheet.getSrcRect(id), dst, {}, 0.f, WHITE);
-    DrawRectangle(x + getW() / 2, y + getH() / 2, 1, 1, RED);
 }
