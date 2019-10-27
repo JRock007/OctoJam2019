@@ -6,6 +6,7 @@
 typedef enum {
     calm,
     excited,
+    scared,
     entering,
     leaving,
     disabled

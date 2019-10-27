@@ -47,9 +47,11 @@ void Person::draw()
         drawColor = Color{component, component, component, component};
     } else if (state == PersonState::excited) {
         drawColor = Color{255, 0, 0, 255};
+    } else if (state == PersonState::scared) {
+        drawColor = Color{0, 0, 255, 255};
     }
 
-    DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, drawColor);
+    DrawTexturePro(tileset, src, Rectangle{ x, y, w, h }, {}, 0.f, drawColor);
 }
 
 void Person::update(float dt) {
@@ -71,7 +73,15 @@ void Person::reactToInteraction(InteractionType type)
             if (state == PersonState::excited) {
                 state = PersonState::calm;
             } else if (state == PersonState::calm) {
-                // Can leave if too noisy
+                // Can become scared
+                int limit = 1 / BECOME_SCARED_AFTER_INTERACTION_PROBABILITY;
+                float random = rand() % limit;
+
+                if (random == (limit - 1)) {
+                    state = PersonState::scared;
+                }
+            } else if (state == PersonState::scared) {
+                // Can leave if too scared
                 int limit = 1 / LEAVE_AFTER_INTERACTION_PROBABILITY;
                 float random = rand() % limit;
 
