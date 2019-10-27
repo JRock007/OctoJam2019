@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "Scene.hpp"
 #include "PauseScene.hpp"
+#include "GameOverScene.hpp"
+#include "Credits.hpp"
 #include "Window.hpp"
 #include "TextureManager.hpp"
 
@@ -22,6 +24,8 @@ private:
     std::vector<Scene*> scenes; // List of scenes to draw
     bool paused = false;
     PauseScene pauseScene;
+    GameOverScene gameOverScene;
+    Credits creditsScene;
 
     float transitionTimer = 0;
 };

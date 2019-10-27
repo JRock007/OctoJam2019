@@ -2,7 +2,9 @@
 #include "Constants.hpp"
 
 SceneManager::SceneManager(Window& window, TextureManager& textureManager) :
-    pauseScene(window, textureManager)
+    pauseScene(window, textureManager),
+    gameOverScene(window, textureManager),
+    creditsScene(window, textureManager)
 {
     
 }
@@ -22,6 +24,10 @@ void SceneManager::drawHud() {
      */
     if (isPaused()) {
         pauseScene.draw();
+    } else if (scenes.back()->didLose()) {
+        gameOverScene.draw();
+    } else if (scenes.back()->didWin()) {
+        creditsScene.draw();
     }
 
     if (transitionTimer > 0) {
@@ -39,7 +45,7 @@ Camera2D SceneManager::getCamera() {
 }
 
 void SceneManager::update(float dt) {
-    if (!isPaused()) {
+    if (!isPaused() && !scenes.back()->didLose() && !scenes.back()->didWin()) {
         for (Scene* scene: scenes) {
             scene->update(dt);
         }
@@ -50,10 +56,6 @@ void SceneManager::update(float dt) {
     } else if (scenes.size() >= 2) {
         // Remove the old scene
         scenes.erase(scenes.begin());
-    }
-
-    if (scenes.back()->didWin()) {
-        
     }
 }
 

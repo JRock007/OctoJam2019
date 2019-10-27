@@ -1,27 +1,27 @@
-#include "PauseScene.hpp"
+#include "GameOverScene.hpp"
 #include "Entities.hpp"
 #include "InteractionType.hpp"
 
-PauseScene::PauseScene(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
+GameOverScene::GameOverScene(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
     // Set map size so the camera can move
     setMapSize(window.getWidth(), window.getHeight());
 }
 
-PauseScene::~PauseScene() {
+GameOverScene::~GameOverScene() {
     
 }
 
-void PauseScene::draw() {
+void GameOverScene::draw() {
     // Fade background
     DrawRectangle(0, 0, mapWidth, mapHeight, Color{0, 0, 0, 100});
 
     // Show text
     float size = 35;
-    float width = MeasureText("Paused", size);
+    float width = MeasureText("Game over :(", size);
 
     float x = window.getWidth() / 2 - width / 2;
     float y = window.getHeight() / 2 - size / 2;
-    DrawText("Paused", x, y, size, RAYWHITE);
+    DrawText("Game over :(", x, y, size, RAYWHITE);
 }
 
-void PauseScene::update(float dt) {}
+void GameOverScene::update(float dt) {}

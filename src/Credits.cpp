@@ -1,27 +1,27 @@
-#include "PauseScene.hpp"
+#include "Credits.hpp"
 #include "Entities.hpp"
 #include "InteractionType.hpp"
 
-PauseScene::PauseScene(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
+Credits::Credits(Window& window, TextureManager& textureManager) : Scene(window, textureManager) {
     // Set map size so the camera can move
     setMapSize(window.getWidth(), window.getHeight());
 }
 
-PauseScene::~PauseScene() {
+Credits::~Credits() {
     
 }
 
-void PauseScene::draw() {
+void Credits::draw() {
     // Fade background
     DrawRectangle(0, 0, mapWidth, mapHeight, Color{0, 0, 0, 100});
 
     // Show text
     float size = 35;
-    float width = MeasureText("Paused", size);
+    float width = MeasureText("Congrats!", size);
 
     float x = window.getWidth() / 2 - width / 2;
     float y = window.getHeight() / 2 - size / 2;
-    DrawText("Paused", x, y, size, RAYWHITE);
+    DrawText("Congrats!", x, y, size, RAYWHITE);
 }
 
-void PauseScene::update(float dt) {}
+void Credits::update(float dt) {}
