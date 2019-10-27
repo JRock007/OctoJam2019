@@ -82,6 +82,14 @@ void Ghost::updateSpeed(float dt) {
 
     vy = std::fmin(vy, GHOST_MAX_SPEED);
     vy = std::fmax(vy, -GHOST_MAX_SPEED);
+
+    // Make sure speed is not too small, or it's ugly on screen
+    if (std::abs(vx) < 10) {
+        vx = 0;
+    }
+    if (std::abs(vy) < 10) {
+        vy = 0;
+    }
 }
 
 void Ghost::updateAcceleration(float dt) {
