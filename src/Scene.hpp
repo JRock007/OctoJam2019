@@ -13,6 +13,8 @@
 
 class Scene: public Node {
 public:
+    Scene(Window&);
+    ~Scene();
     virtual void draw() override;
     virtual void update(float dt) override;
 
@@ -33,8 +35,6 @@ public:
     void moveGhostTo(float x, float y);
 
 protected:
-    Scene(Window&);
-    ~Scene();
 
     Window& window;
     GhostCamera camera;

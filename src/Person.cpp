@@ -1,9 +1,14 @@
 #include "Person.hpp"
 #include <iostream>
+#include <cstdlib>
 
-Person::Person(float x, float y) : Entity(x, y, 10, 20)
+Person::Person(float x, float y, Texture2D& tileset) :
+	Entity(x, y, 16 * SPRITE_SCALE, 32 * SPRITE_SCALE),
+	tileset(tileset),
+	disabled(false)
 {
-    disabled = false;
+	int id = std::rand() % 3;
+	src = Rectangle{ (11.f + id) * 16, 16, 1 * 16, 2 * 16 };
 }
 
 Person::~Person()
@@ -25,7 +30,8 @@ void Person::draw()
 {
 	if (disabled) return;
 
-    DrawRectangle(x, y, w, h, BLUE);
+    //DrawRectangle(x, y, w, h, BLUE);
+	DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, WHITE);
 }
 
 void Person::reactToInteraction(InteractionType type)

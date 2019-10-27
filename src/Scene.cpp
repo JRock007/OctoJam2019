@@ -6,11 +6,12 @@
 #include "math.h"
 #include <cmath>
 #include <limits>
+#include "TextureManager.hpp"
 
 Scene::Scene(Window& window) :
     window(window),
-    ghost(Ghost(window.getWidth() / 2, window.getHeight() / 2)),
-    camera(GhostCamera(ghost, window)),
+    ghost(window.getWidth() / 2, window.getHeight() / 2, TextureManager::getTexture("tileset")),
+    camera(ghost, window),
     mapWidth(window.getWidth()),
     mapHeight(window.getHeight())
 {
@@ -296,15 +297,15 @@ GhostAction Scene::getInputAction() {
 
 void Scene::spawnTable(float x, float y)
 {
-	Table table(x, y);
-	std::shared_ptr<Table> ptable(new Table(x, y));
+	Table table(x, y, TextureManager::getTexture("tileset"), Rectangle{ 5 * 16,3 * 16,4 * 16,4 * 16 });
+	// std::shared_ptr<Table> ptable(new Table(x, y));
 	tables.push_back(std::make_shared<Table>(table));
 	nodes.push_back(std::make_shared<Table>(table));
 }
 
 void Scene::spawnPerson(float x, float y)
 {
-	Person person(x, y);
+	Person person(x, y, TextureManager::getTexture("tileset"));
 	person.enter(); // Toggle visibility on
 
 	persons.push_back(std::make_shared<Person>(person));

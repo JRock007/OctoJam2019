@@ -2,8 +2,11 @@
 #include "Constants.hpp"
 #include <iostream>
 
-Ghost::Ghost(float x, float y) : Entity(x, y, 30, 40)
+Ghost::Ghost(float x, float y, Texture2D& tileset) : 
+	Entity(x, y, 16 * SPRITE_SCALE, 32 * SPRITE_SCALE),
+	tileset(tileset)
 {
+	src = Rectangle{ 10 * 16, 16, 1 * 16, 2 * 16 };
 }
 
 Ghost::~Ghost()
@@ -13,7 +16,8 @@ Ghost::~Ghost()
 
 void Ghost::draw()
 {
-	DrawRectangle(x, y, w, h, LIGHTGRAY);
+	// DrawRectangle(x, y, w, h, LIGHTGRAY);
+	DrawTexturePro(tileset, src, Rectangle{ x,y,w,h }, {}, 0.f, WHITE);
 }
 
 void Ghost::update(float dt)

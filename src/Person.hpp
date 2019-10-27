@@ -7,7 +7,7 @@ class Person:
     public Entity
 {
 public:
-    Person(float x, float y);
+    Person(float x, float y, Texture2D& tileset);
     ~Person();
 
     virtual void draw() override;
@@ -22,4 +22,6 @@ public:
 
 protected:
 	bool disabled;
+	Rectangle src;
+	Texture2D& tileset;
 };

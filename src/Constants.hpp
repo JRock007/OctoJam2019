@@ -18,3 +18,5 @@
 
 #define TILE_SIZE 16
 #define SPRITES_SCALE 4
+
+#define BACKGROUND_COLOR Color{ 106, 101, 118 }
