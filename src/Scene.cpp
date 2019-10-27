@@ -48,7 +48,6 @@ void Scene::draw() {
     drawBackground();
     drawNodes();
     drawGhost(); // Should be called last so the ghost is on top
-	DrawTexture(maskTexture, 0, 0, WHITE);
 }
 
 void Scene::update(float dt) {
