@@ -51,7 +51,7 @@ void Scene::drawGhost() {
     }
     score /= persons.size();
 
-    if (score == 0) {
+    if (score == 0 && GetTime() > 5) {
         lost = true;
     }
 

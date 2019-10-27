@@ -23,8 +23,8 @@ int main(void)
 
 	// SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
     auto window = Window();
-    // window.toggleFullscreen();
-    // window.setCursorEnabled(false);
+    window.toggleFullscreen();
+    window.setCursorEnabled(false);
 	const int screenWidth = window.getWidth();
 	const int screenHeight = window.getHeight();
 

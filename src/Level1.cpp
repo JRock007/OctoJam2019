@@ -30,7 +30,15 @@ void Level1::update(float dt) {
 
     if (random == (limit - 1)) {
         // Make a random person excited
-        int i = rand() % persons.size();
-        persons[i]->becomeExcited();
+        int tries = 0;
+        while (tries < 100) {
+            int i = rand() % persons.size();
+
+            if (persons[i]->getState() == PersonState::calm) {
+                persons[i]->becomeExcited();
+                break;
+            }
+            tries += 1;
+        }
     }
 }
