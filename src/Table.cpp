@@ -1,7 +1,7 @@
 #include "Table.hpp"
 
 Table::Table(float x, float y, Texture2D& texture, Rectangle src) : 
-	Entity(x, y, SPRITES_SCALE * src.width, SPRITES_SCALE * src.height),
+	Entity(x, y, src.width, src.height),
 	texture(texture),
 	src(src)
 {
