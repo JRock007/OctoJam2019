@@ -67,6 +67,7 @@ protected:
 	std::vector<std::shared_ptr<Person>> persons;
 	std::vector<std::shared_ptr<Interactable>> interactables;
 	Texture2D tilesetTexture;
+	Texture2D maskTexture;
 	MapLoader mapLoader;
 
 private:
