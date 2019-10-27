@@ -20,6 +20,17 @@ Scene::Scene(Window& window, TextureManager& textureManager) :
 	textureManager(textureManager)
 {
     camera.jumpToPosition(ghost.getX(), ghost.getY());
+
+    float scale = 1.01f;
+    if (mapWidth < window.getWidth()) {
+        scale = window.getWidth() / mapWidth;
+    }
+
+    if (mapHeight * scale < window.getHeight()) {
+        scale = window.getHeight() / mapHeight;
+    }
+
+    camera.camera.zoom = scale;
 };
 
 Scene::~Scene() {

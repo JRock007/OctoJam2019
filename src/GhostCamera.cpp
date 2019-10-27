@@ -67,15 +67,18 @@ void GhostCamera::updateSpeed() {
 }
 
 void GhostCamera::clamp() {
-    if (camera.target.x - camera.offset.x < minX) {
-        camera.target.x = minX + camera.offset.x;
-    } else if (camera.target.x + camera.offset.x > maxX) {
-        camera.target.x = maxX - camera.offset.x;
+    float offsetX = camera.offset.x / camera.zoom;
+    float offsetY = camera.offset.y / camera.zoom;
+
+    if (camera.target.x - offsetX < minX) {
+        camera.target.x = minX + offsetX;
+    } else if (camera.target.x + offsetX > maxX) {
+        camera.target.x = maxX - offsetX;
     }
 
-    if (camera.target.y - camera.offset.y < minY) {
-        camera.target.y = minY + camera.offset.y;
-    } else if (camera.target.y + camera.offset.y > maxY) {
-        camera.target.y = maxY - camera.offset.y;
+    if (camera.target.y - offsetY < minY) {
+        camera.target.y = minY + offsetY;
+    } else if (camera.target.y + offsetY > maxY) {
+        camera.target.y = maxY - offsetY;
     }
 }
