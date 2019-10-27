@@ -29,7 +29,7 @@ int main(void)
 	const int screenHeight = window.getHeight();
 
 	TextureManager textureManager;
-	textureManager.loadTexture("tileset", "assets/Tileset_Prototype.png");
+	textureManager.loadTexture("tileset", "assets/Tileset.png");
 	textureManager.loadTexture("ghost", "assets/Ghost_Spritesheet.png");
 	textureManager.loadTexture("book", "assets/Book_Spritesheet.png");
 	textureManager.loadTexture("backstudent", "assets/Back_Student_Spritesheet.png");
