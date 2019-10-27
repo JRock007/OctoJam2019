@@ -40,8 +40,6 @@ void MapLoader::spawnEntities(int map[], Scene& scene, int width, int height) {
 }
 
 void MapLoader::drawTiles(int tiles[], Scene& scene, int width, int height) {
-    scene.setMapSize(width * SPRITES_SCALE * TILE_SIZE, height * SPRITES_SCALE * TILE_SIZE);
-
     for (int i = 0; i < width * height; i++) {
         int x = SPRITES_SCALE * TILE_SIZE * (i % width);
         int y = SPRITES_SCALE * TILE_SIZE * (i / width);
