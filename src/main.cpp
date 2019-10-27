@@ -25,8 +25,6 @@ int main(void)
     auto window = Window();
     window.toggleFullscreen();
     window.setCursorEnabled(false);
-	const int screenWidth = window.getWidth();
-	const int screenHeight = window.getHeight();
 
 	TextureManager textureManager;
 	textureManager.loadTexture("tileset", "assets/Tileset.png");
@@ -45,14 +43,6 @@ int main(void)
     
     sceneManager.moveToScene(&lvl1);
     // sceneManager.moveToScene(&lvl2);
-
-	float scale = 4;
-	Rectangle tableSrc = { 5 * 16, 0, 4 * 16, 3 * 16 };
-	Rectangle tableDst = { 500, 300, scale * 4 * 16, scale * 3 * 16 };
-	Rectangle ghostSrc = { 10 * 16, 1 * 16, 1 * 16, 2 * 16 };
-	Rectangle ghostDst = { 700, 500, scale * 1 * 16, scale * 2 * 16 };
-//	Rectangle personSrc = { 5 * 16, 0, 4 * 16, 3 * 16 };
-//	Rectangle personDst = { 500, 300, scale * 4 * 16, scale * 3 * 16 };
 
 	// SHADERS
 	// std::cout << GLSL_VERSION << std::endl;
