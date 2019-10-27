@@ -5,21 +5,21 @@
 #include "AnimationManager.hpp"
 #include "Spritesheet.hpp"
 
-typedef enum {
+enum class PersonState {
     calm,
     excited,
     scared,
     entering,
     leaving,
     disabled
-} PersonState;
+};
 
-typedef enum {
+enum class PersonOrientation {
     top,
     down,
     left,
     right,
-} PersonOrientation;
+};
 
 
 class Person:

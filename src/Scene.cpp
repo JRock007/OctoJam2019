@@ -78,7 +78,7 @@ void Scene::update(float dt) {
     ghost.clamp(0, 0, mapWidth, mapHeight);
     camera.update(dt);
 
-	// Highlight closer item to ghost below a given range
+	// Highlight closest item to ghost below a given range
     highlightedInteractable = getClosestNeighbor(ghost);
 
     if (highlightedInteractable != nullptr) {
@@ -86,6 +86,8 @@ void Scene::update(float dt) {
 
         if (dist <= GHOST_ACTION_RANGE) {
             highlightedInteractable->setHighlight(true);
+        } else {
+            highlightedInteractable = nullptr;
         }
     }
 
