@@ -62,6 +62,10 @@ void Scene::drawGhost() {
     }
     score /= persons.size();
 
+    if (score == 0) {
+        std::cout << "You lost" << std::endl;
+    }
+
     BeginBlendMode(BLEND_MULTIPLIED);
         float scale = 3 + 5 * score;
 
