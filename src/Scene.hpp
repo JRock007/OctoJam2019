@@ -37,12 +37,16 @@ public:
     void moveGhostTo(float x, float y);
 
 protected:
-
     Window& window;
     GhostCamera camera;
+
     float mapWidth;
     float mapHeight;
 
+    void drawBackground();
+    void drawNodes();
+    void drawGhost();
+    
     float getInputAngle();
     float getInputAmplitude();
     GhostAction getInputAction();

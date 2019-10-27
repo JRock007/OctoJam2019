@@ -20,8 +20,10 @@ Level2::~Level2() {
 }
 
 void Level2::draw() {
-    Scene::draw();
+    drawBackground();
     mapLoader.drawTiles(tiles, *this, mapWidth, mapHeight);
+    drawNodes();
+    drawGhost();
 }
 
 void Level2::update(float dt) {

@@ -28,17 +28,25 @@ Scene::~Scene() {
 	}
 };
 
-void Scene::draw() {
-    // Draw background
+void Scene::drawBackground() {
     DrawRectangle(0, 0, mapWidth, mapHeight, BACKGROUND_COLOR);
+}
 
+void Scene::drawNodes() {
     // Delegate drawing to all the nodes
     for (auto& node: nodes) {
         node->draw();
     }
+}
 
-    // Draw the ghost last so it's on top
+void Scene::drawGhost() {
     ghost.draw();
+}
+
+void Scene::draw() {
+    drawBackground();
+    drawNodes();
+    drawGhost(); // Should be called last so the ghost is on top
 }
 
 void Scene::update(float dt) {
